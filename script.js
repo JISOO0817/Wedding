@@ -1,9 +1,9 @@
 // ========================================================
 // 설정값 모음 (여기 값들만 바꾸면 대부분 반영됩니다)
 // ========================================================
-const WEDDING_DATE = new Date('2026-08-01T14:30:00+09:00');
-const GROOM_NAME = '성훈';
-const BRIDE_NAME = '나영';
+const WEDDING_DATE = new Date('2026-09-19T11:00:00+09:00');
+const GROOM_NAME = '재원';
+const BRIDE_NAME = '지수';
 
 // TODO: 실제 구글폼 링크로 교체하세요
 const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
@@ -107,22 +107,43 @@ function toggleInterview() {
 }
 
 // ========================================================
-// 갤러리 (placeholder 9칸) + 라이트박스
-// 실제 사진 준비되면 이 함수 대신 <img src="images/1.jpg"> 형태로 직접 넣어도 됩니다.
+// 갤러리 + 라이트박스
 // ========================================================
+const GALLERY_IMAGES = ['gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
+let lightboxIndex = 0;
 function initGallery() {
   const gallery = document.getElementById('gallery');
-  let html = '';
-  for (let i = 1; i <= 9; i++) {
-    html += `<div class="img-placeholder" onclick="openLightbox(${i})"><span>사진 ${i}</span></div>`;
-  }
-  gallery.innerHTML = html;
+  gallery.innerHTML = GALLERY_IMAGES.map((f, i) =>
+    `<img src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
+}
+function renderLightbox() {
+  document.getElementById('lightboxContent').innerHTML =
+    `<img src="images/${GALLERY_IMAGES[lightboxIndex]}" alt="갤러리 사진 확대">`;
 }
 function openLightbox(i) {
-  document.getElementById('lightboxContent').innerHTML =
-    `<div class="img-placeholder"><span>사진 ${i} (큰 이미지로 교체 예정)</span></div>`;
+  lightboxIndex = i;
+  renderLightbox();
   openModal('lightbox');
 }
+function moveLightbox(delta) {
+  lightboxIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+  renderLightbox();
+}
+
+// 인앱 브라우저 등에서 뷰포트 확대 제한이 무시될 때를 대비한 방어용 블러 처리
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox.classList.contains('open')) return;
+    const zoomed = window.visualViewport.scale > 1.02;
+    lightbox.classList.toggle('zoomed', zoomed);
+  });
+}
+
+// PC에서 Ctrl+휠로 페이지 확대하는 것 방지
+window.addEventListener('wheel', (e) => {
+  if (e.ctrlKey) e.preventDefault();
+}, { passive: false });
 
 // ========================================================
 // 안내사항 탭
@@ -161,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function shareInvitation() {
   const shareData = {
     title: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼합니다.`,
-    text: '2026년 8월 1일 토요일 오후 2시 30분 · 청담 라움호텔 가든홀',
+    text: '2026년 9월 19일 토요일 오전 11시 · KU컨벤션 웨딩홀',
     url: window.location.href
   };
   if (navigator.share) {

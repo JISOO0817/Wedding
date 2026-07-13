@@ -32,9 +32,7 @@
 
   <!-- ===================== 1. 메인 ===================== -->
   <section class="hero">
-    <div class="img-placeholder hero-img" data-note="메인 사진 (세로형 권장)">
-      <span>메인 사진<br>교체 위치</span>
-    </div>
+    <img class="hero-img" src="images/main.jpg" alt="메인 사진">
     <div class="hero-caption reveal">
       2026년 9월 19일 토요일 오전 11시<br>ku컨벤션 웨딩홀
     </div>
@@ -180,14 +178,14 @@
     <span class="eyebrow">GALLERY</span>
     <h2 class="section-title">우리가 함께 한 모든 순간</h2>
 
-    <div class="gallery reveal" id="gallery">
-      <!-- 9칸 placeholder. 실제 사진으로 교체 시 이 div들을 <img src="images/xx.jpg"> 로 바꾸세요 -->
-    </div>
+    <div class="gallery reveal" id="gallery"></div>
   </section>
 
   <!-- 갤러리 라이트박스 -->
   <div class="modal lightbox" id="lightbox">
     <button class="modal-close" onclick="closeModal('lightbox')">✕</button>
+    <button class="lightbox-nav prev" onclick="moveLightbox(-1)">‹</button>
+    <button class="lightbox-nav next" onclick="moveLightbox(1)">›</button>
     <div class="lightbox-content" id="lightboxContent"></div>
   </div>
 

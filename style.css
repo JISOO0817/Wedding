@@ -24,7 +24,8 @@ html, body {
 
 body { max-width: 480px; margin: 0 auto; position: relative; }
 
-img { pointer-events: none; user-select: none; }
+img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+.gallery img, .lightbox-content img { pointer-events: auto; }
 
 /* ============ 로딩 화면 ============ */
 .loading {
@@ -84,7 +85,7 @@ img { pointer-events: none; user-select: none; }
   text-align: center; font-size: 13px; line-height: 1.6;
   border-radius: var(--radius);
 }
-.hero-img { width: 100%; aspect-ratio: 3/4; }
+.hero-img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover; }
 .wide-img { width: 100%; aspect-ratio: 4/3; margin: 30px 0; }
 .round-img { width: 130px; height: 130px; border-radius: 50%; }
 .tl-img { width: 100%; aspect-ratio: 1/1; border-radius: 10px; }
@@ -141,7 +142,7 @@ img { pointer-events: none; user-select: none; }
 
 /* ============ 캘린더 / 카운트다운 ============ */
 .calendar { width: 100%; margin: 20px 0; }
-.calendar table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.calendar table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }
 .calendar th { color: var(--ink-soft); font-weight: 400; padding: 6px 0; }
 .calendar td { padding: 8px 0; text-align: center; position: relative; }
 .calendar td.today span {
@@ -197,10 +198,19 @@ img { pointer-events: none; user-select: none; }
 
 /* ============ 갤러리 ============ */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
-.gallery .img-placeholder { aspect-ratio: 1/1; font-size: 11px; cursor: pointer; border-radius: 0; }
+.gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer; }
 .lightbox { background: rgba(0,0,0,.85); }
-.lightbox-content { width: 90%; }
-.lightbox-content .img-placeholder { width: 100%; aspect-ratio: 3/4; }
+.lightbox-content { width: 90%; touch-action: pan-x pan-y; }
+.lightbox-content img { width: 100%; }
+.lightbox.zoomed .lightbox-content img { filter: blur(20px); }
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 1;
+  width: 40px; height: 40px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,.15); color: #fff; font-size: 24px;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.lightbox-nav.prev { left: 10px; }
+.lightbox-nav.next { right: 10px; }
 
 /* ============ 오시는 길 ============ */
 .map-links { display: flex; gap: 10px; margin: 20px 0; }
