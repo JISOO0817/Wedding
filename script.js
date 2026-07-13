@@ -10,16 +10,39 @@ const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
 const GUESTBOOK_FORM_URL = '';  // 예: 'https://forms.gle/yyyyyyyy'
 
 // ========================================================
-// 로딩 화면
+// 초기 진입 (히어로 인트로)
 // ========================================================
 window.addEventListener('load', () => {
+  initGallery();
+  initReveal();
+  initLeaves();
+
   setTimeout(() => {
-    document.getElementById('loading').classList.add('fade-out');
-    document.getElementById('invitation').classList.remove('hidden');
-    initGallery();
-    initReveal();
-  }, 1800);
+    document.getElementById('heroImg').classList.add('sharp');
+    document.getElementById('heroIntro').classList.add('hide');
+  }, 2000);
 });
+
+// ========================================================
+// 히어로 낙엽 애니메이션
+// ========================================================
+function initLeaves() {
+  const container = document.getElementById('leaves');
+  const colors = ['var(--leaf)', 'var(--leaf-soft)'];
+  const count = 16;
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    const left = Math.random() * 100;
+    const size = 8 + Math.random() * 6;
+    const duration = 7 + Math.random() * 6;
+    const delay = -(Math.random() * duration);
+    const drift = Math.round(Math.random() * 60 - 30);
+    const rotateDir = Math.random() > 0.5 ? 1 : -1;
+    const color = colors[i % colors.length];
+    html += `<div class="leaf" style="left:${left}%; width:${size}px; height:${size * 1.3}px; background:${color}; animation-duration:${duration}s; animation-delay:${delay}s; --drift:${drift}px; --rotate-dir:${rotateDir};"></div>`;
+  }
+  container.innerHTML = html;
+}
 
 // ========================================================
 // 스크롤 리빌 애니메이션
@@ -96,17 +119,6 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 // ========================================================
-// 인터뷰 더보기
-// ========================================================
-function toggleInterview() {
-  const items = document.querySelectorAll('.interview-item.more');
-  const btn = document.getElementById('interviewBtn');
-  const opening = !items[0].classList.contains('show');
-  items.forEach(el => el.classList.toggle('show', opening));
-  btn.textContent = opening ? '인터뷰 접기' : '인터뷰 더 보기';
-}
-
-// ========================================================
 // 갤러리 + 라이트박스
 // ========================================================
 const GALLERY_IMAGES = ['gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
@@ -119,6 +131,7 @@ function initGallery() {
 function renderLightbox() {
   document.getElementById('lightboxContent').innerHTML =
     `<img src="images/${GALLERY_IMAGES[lightboxIndex]}" alt="갤러리 사진 확대">`;
+  document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
 }
 function openLightbox(i) {
   lightboxIndex = i;
@@ -144,14 +157,6 @@ if (window.visualViewport) {
 window.addEventListener('wheel', (e) => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
-
-// ========================================================
-// 안내사항 탭
-// ========================================================
-function showTab(index) {
-  document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', i === index));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', Number(p.dataset.tab) === index));
-}
 
 // ========================================================
 // 계좌번호 아코디언 + 복사
