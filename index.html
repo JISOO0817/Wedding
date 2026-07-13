@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>이재원 ♥ 전지수 결혼합니다</title>
+
+<!-- 카카오톡/문자 공유 시 미리보기용 메타태그. 대표 이미지는 zW실제 사진으로 교체하세요 -->
+<meta property="og:title" content="이재원 ♥ 전지수 결혼합니다.">
+<meta property="og:description" content="2026년 9월 19일 토요일 오전 11시 · ku컨벤션 웨딩홀">
+<meta property="og:image" content="images/og-main.jpg">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== 로딩 화면 ===================== -->
+<div class="loading" id="loading">
+  <div class="loading-names">
+    <span>재원</span>
+    <span class="loading-heart">♥</span>
+    <span>지수</span>
+  </div>
+  <div class="loading-date">2026.09.19</div>
+</div>
+
+<main id="invitation" class="hidden">
+
+  <!-- ===================== 1. 메인 ===================== -->
+  <section class="hero">
+    <div class="img-placeholder hero-img" data-note="메인 사진 (세로형 권장)">
+      <span>메인 사진<br>교체 위치</span>
+    </div>
+    <div class="hero-caption reveal">
+      2026년 9월 19일 토요일 오전 11시<br>ku컨벤션 웨딩홀
+    </div>
+  </section>
+
+  <!-- ===================== 2. 초대 문구 ===================== -->
+  <section class="block center">
+    <span class="eyebrow">INVITATION</span>
+    <p class="quote reveal">
+      서로의 이름을 부르는 것만으로도<br>
+      사랑의 깊이를 확인할 수 있는<br>
+      저희 두 사람이 결혼식을 올리게 되었습니다.<br><br>
+      평생 서로를 귀하게 여기며,<br>
+      첫 마음 그대로 존중하고 배려하며 살겠습니다.<br><br>
+      오로지 믿음과 사랑을 약속하는 날,<br>
+      오셔서 축복해 주시면 큰 기쁨으로 간직하겠습니다.
+    </p>
+
+    <div class="img-placeholder wide-img" data-note="본식 스냅 등">
+      <span>사진 교체 위치</span>
+    </div>
+
+    <div class="family-line reveal">
+      <p>박윤석 · 유미숙 의 장남 <strong>성훈</strong></p>
+      <p>김정길 · 신혜정 의 장녀 <strong>나영</strong></p>
+    </div>
+
+    <button class="btn outline" onclick="openModal('contactModal')">연락하기</button>
+  </section>
+
+  <!-- 연락처 모달 -->
+  <div class="modal" id="contactModal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
+      <div class="contact-grid">
+        <div class="contact-side">
+          <h4>신랑측</h4>
+          <div class="contact-row"><span>신랑</span><b>이재원</b><a href="tel:010-0000-0000">📞</a></div>
+          <div class="contact-row"><span>아버지</span><b>이형렬</b><a href="tel:010-0000-0000">📞</a></div>
+          <div class="contact-row"><span>어머니</span><b>이경진</b><a href="tel:010-0000-0000">📞</a></div>
+        </div>
+        <div class="contact-side">
+          <h4>신부측</h4>
+          <div class="contact-row"><span>신부</span><b>전지수</b><a href="tel:010-0000-0000">📞</a></div>
+          <div class="contact-row"><span>아버지</span><b>전경표</b><a href="tel:010-0000-0000">📞</a></div>
+          <div class="contact-row"><span>어머니</span><b>이태선</b><a href="tel:010-0000-0000">📞</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 3. 웨딩데이 / 카운트다운 ===================== -->
+  <section class="block center alt-bg">
+    <span class="eyebrow">WEDDING DAY</span>
+    <p class="date-line reveal">2026년 9월 19일 토요일 오전 11시</p>
+
+    <div class="calendar reveal" id="calendar"></div>
+
+    <div class="countdown reveal" id="countdown">
+      <div><b id="cd-days">00</b><span>Days</span></div>
+      <div><b id="cd-hours">00</b><span>Hours</span></div>
+      <div><b id="cd-min">00</b><span>Minutes</span></div>
+      <div><b id="cd-sec">00</b><span>Seconds</span></div>
+    </div>
+
+    <p class="dday-line reveal" id="ddayMessage">재원 ♥ 지수 님의 결혼식이 <b id="ddayNum">-</b>일 남았습니다.</p>
+  </section>
+
+  <!-- ===================== 4. 신랑 신부 소개 ===================== -->
+  <section class="block center">
+    <span class="eyebrow">INTRODUCTION</span>
+    <h2 class="section-title">신랑 & 신부 소개</h2>
+
+    <div class="intro-photos reveal">
+      <div class="img-placeholder round-img"><span>신랑 사진</span></div>
+      <div class="heart-divider">♥</div>
+      <div class="img-placeholder round-img"><span>신부 사진</span></div>
+    </div>
+
+    <div class="intro-cards reveal">
+      <div class="intro-card">
+        <span class="intro-label">Groom</span>
+        <h3>이 재 원</h3>
+        <span class="tag tag-blue">#ENFP</span>
+        <p>이형렬 · 이경진 아들<br>1992년 07월 27일, 수원<br>소프트웨어 개발자</p>
+      </div>
+      <div class="intro-card">
+        <span class="intro-label">Bride</span>
+        <h3>전 지 수</h3>
+        <span class="tag tag-pink">#INTJ</span>
+        <p>전경표 · 이태선의 딸<br>1996년 08월 17일, 서울<br>디지털 마케팅 전문가</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. 우리의 타임라인 ===================== -->
+  <section class="block center alt-bg">
+    <span class="eyebrow">OUR TIMELINE</span>
+    <h2 class="section-title">우리가 걸어온 그 길</h2>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="img-placeholder tl-img"><span>사진</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text">
+          <span>21년 겨울, 서울</span>
+          <h4>💗 운명 같은 첫 만남</h4>
+          <p>작은 골목길 카페에서<br>우연이 운명이 된 날</p>
+        </div>
+      </div>
+      <div class="timeline-item reverse">
+        <div class="tl-text right">
+          <span>어느새 2000일이 지나고...</span>
+          <h4>함께 보낸 나날들 🎅</h4>
+          <p>서로의 하루가 되어<br>당연해진 우리</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="img-placeholder tl-img"><span>사진</span></div>
+      </div>
+      <div class="timeline-item">
+        <div class="img-placeholder tl-img"><span>사진</span></div>
+        <div class="tl-dot"></div>
+        <div class="tl-text">
+          <span>대답은 "YES!"</span>
+          <h4>💐 프로포즈</h4>
+          <p>같은 마음으로 같은 미래를 향한<br>단 하나의 약속</p>
+        </div>
+      </div>
+      <div class="timeline-item reverse">
+        <div class="tl-text right">
+          <span>26년 9월 19일</span>
+          <h4>웨딩데이 💎</h4>
+          <p>너와 나 = 우리<br>새로운 날을 시작하는 날</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="img-placeholder tl-img"><span>사진</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. 갤러리 ===================== -->
+  <section class="block center alt-bg">
+    <span class="eyebrow">GALLERY</span>
+    <h2 class="section-title">우리가 함께 한 모든 순간</h2>
+
+    <div class="gallery reveal" id="gallery">
+      <!-- 9칸 placeholder. 실제 사진으로 교체 시 이 div들을 <img src="images/xx.jpg"> 로 바꾸세요 -->
+    </div>
+  </section>
+
+  <!-- 갤러리 라이트박스 -->
+  <div class="modal lightbox" id="lightbox">
+    <button class="modal-close" onclick="closeModal('lightbox')">✕</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+  </div>
+
+  <!-- ===================== 8. 오시는 길 ===================== -->
+  <section class="block center">
+    <span class="eyebrow">LOCATION</span>
+    <h2 class="section-title">오시는 길</h2>
+    <p class="address reveal">
+      서울 강남구 역삼동 680-1<br>청담 라움호텔 가든홀
+    </p>
+    <button class="btn outline small" onclick="location.href='tel:15442637'">안내 전화</button>
+
+    <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
+    <div class="map-links reveal">
+      <a href="https://map.naver.com/v5/search/서울 강남구 역삼동 680-1" target="_blank">네이버 지도</a>
+      <a href="https://map.kakao.com/link/search/서울 강남구 역삼동 680-1" target="_blank">카카오맵</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=서울 강남구 역삼동 680-1" target="_blank">구글 지도</a>
+    </div>
+
+    <div class="info-accordion reveal">
+      <div class="acc-item">
+        <p><b>버스 이용시</b></p>
+        <p>일반버스 : 11-1, 3, 58, 7<br>간선버스 : 101, 206, 110, 120</p>
+      </div>
+      <div class="acc-item">
+        <p><b>지하철 이용시</b></p>
+        <p>3호선 : 대치역 하차 후 버스 이용<br>5호선 : 선정릉역 4번 출구 (도보 10분)</p>
+      </div>
+      <div class="acc-item">
+        <p><b>주차 이용시</b></p>
+        <p>더 라움 주차장 이용<br>※ 주차권은 1층 카운터에서 수령</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 9. 안내사항 (탭) ===================== -->
+  <section class="block center alt-bg">
+    <span class="eyebrow">INFORMATION</span>
+    <h2 class="section-title">안내사항</h2>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" onclick="showTab(0)">🍽️ 피로연</button>
+      <button class="tab-btn" onclick="showTab(1)">📸 포토부스</button>
+      <button class="tab-btn" onclick="showTab(2)">🚌 전세버스</button>
+    </div>
+
+    <div class="tab-panel active" data-tab="0">
+      <div class="img-placeholder wide-img"><span>피로연 사진</span></div>
+      <p>바쁘신 중에도 축하해 주신 모든 분들께 감사드립니다.<br>두 사람의 앞날을 축복해 주시면 감사하겠습니다.<br>작은 자리에 함께해 주세요.</p>
+    </div>
+    <div class="tab-panel" data-tab="1">
+      <div class="img-placeholder wide-img"><span>포토부스 사진</span></div>
+      <p>일정 : 예식 당일 12시 30분 ~ 1시 30분<br>장소 : 가든홀 예식장 로비 데스크 옆</p>
+    </div>
+    <div class="tab-panel" data-tab="2">
+      <div class="img-placeholder wide-img"><span>전세버스 사진</span></div>
+      <p>일정 : 2026.08.01 오전 9시 30분 출발<br>장소 : 강남역 지하철 1호선 2번 출구 앞</p>
+    </div>
+  </section>
+
+  <!-- ===================== 10. 참석 여부 (RSVP) =====================
+       GitHub Pages는 정적 호스팅이라 서버 저장이 불가능합니다.
+       아래 버튼의 href를 본인 구글폼 링크로 교체하세요.
+       (구글폼 만들기: forms.google.com → 새 양식 → 성함/참석여부/인원 질문 추가)
+  -->
+  <section class="block center">
+    <span class="eyebrow">R/S/V/P</span>
+    <h2 class="section-title">참석 여부</h2>
+    <p class="reveal">
+      특별한 날 축하하는 마음으로 참석해 주시는 모든 분들을<br>
+      귀하게 모실 수 있도록 참석 여부 전달을 꼭 부탁드립니다.
+    </p>
+    <a class="btn solid" href="#" id="rsvpLink" target="_blank">참석 여부 전달하기</a>
+    <p class="hint">* 아직 폼이 연결되지 않았어요. index.html의 #rsvpLink href를 본인 구글폼 주소로 바꿔주세요.</p>
+  </section>
+
+  <!-- ===================== 11. 방명록 =====================
+       정적 사이트라 새 글 저장은 안 됩니다. 예시글만 보여주고,
+       새 글 작성은 방명록용 구글폼으로 연결하는 걸 추천드려요.
+  -->
+  <section class="block center alt-bg">
+    <span class="eyebrow">GUEST BOOK</span>
+    <h2 class="section-title">방명록</h2>
+
+    <ul class="guestbook reveal">
+      <li><h4>김지은</h4><p>두 분의 결혼을 진심으로 축하드립니다! 언제나 행복 가득한 가정 이루시길 바라며, 멋진 미래를 함께 걸어가세요. 너무 예쁜 커플이에요💐</p></li>
+      <li><h4>장영수</h4><p>두 사람의 결혼을 정말 축하해요! 이제 둘만의 길을 함께 걸어갈 거라 생각하니 너무 기쁘네요. 늘 웃음 가득한 가정 되세요! 🎉</p></li>
+      <li><h4>박소연</h4><p>나영이, 성훈이 결혼 진심으로 축하해요! 항상 서로 아껴주고 사랑하며 행복하게 지내길 바래요. 그대들의 앞날에 많은 축복이 함께하길! 🌹</p></li>
+    </ul>
+
+    <a class="btn outline" href="#" id="guestbookLink" target="_blank">방명록 작성하기</a>
+    <p class="hint">* #guestbookLink href를 방명록용 구글폼 주소로 바꿔주세요.</p>
+  </section>
+
+  <!-- ===================== 12. 마음 전하는 곳 (계좌번호) ===================== -->
+  <section class="block center">
+    <span class="eyebrow">THANKS TO</span>
+    <h2 class="section-title">마음 전하는 곳</h2>
+    <p class="reveal">
+      직접 축하를 전하지 못하는 분들을 위해<br>
+      부득이하게 계좌번호를 기재하게 되었습니다.<br>넓은 마음으로 양해 부탁드립니다.
+    </p>
+
+    <div class="pay-box reveal">
+      <button class="pay-toggle" onclick="toggleAccordion('male')">신랑측 계좌번호 <span id="male-arrow">▾</span></button>
+      <div class="pay-content" id="male-content">
+        <div class="pay-row"><span>신랑 박성훈</span><b>우리 110-123-456789</b><button onclick="copyAccount('우리 110-123-456789')">복사</button></div>
+        <div class="pay-row"><span>아버지 박윤석</span><b>농협 201-987-654321</b><button onclick="copyAccount('농협 201-987-654321')">복사</button></div>
+      </div>
+
+      <button class="pay-toggle" onclick="toggleAccordion('female')">신부측 계좌번호 <span id="female-arrow">▾</span></button>
+      <div class="pay-content" id="female-content">
+        <div class="pay-row"><span>신부 김나영</span><b>하나 407-852-963478</b><button onclick="copyAccount('하나 407-852-963478')">복사</button></div>
+        <div class="pay-row"><span>아버지 김정길</span><b>우체국 512-134-879654</b><button onclick="copyAccount('우체국 512-134-879654')">복사</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 13. 클로징 ===================== -->
+  <section class="closing">
+    <div class="img-placeholder closing-img"><span>클로징 사진</span></div>
+    <div class="closing-text">
+      <p>별을 보고 있으면 어둠을<br>두려워할 필요가 없잖아요.<br>아름답구나, 그 생각부터 하게 되니까<br>우리, 그렇게 사랑해요.</p>
+      <span>- 정현주, &lt;그래도, 사랑&gt; -</span>
+    </div>
+  </section>
+
+  <!-- ===================== 하단 공유 ===================== -->
+  <footer class="footer">
+    <button onclick="shareInvitation()">🔗 공유하기</button>
+    <button onclick="copyLink()">📋 링크 복사하기</button>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
