@@ -190,25 +190,15 @@ function addToGoogleCalendar() {
 // ========================================================
 // 카카오맵
 // ========================================================
-const WEDDING_ADDRESS = '서울 광진구 아차산로36길 5';
+const WEDDING_LAT = 37.5383387532099;
+const WEDDING_LNG = 127.074640682527;
 function initKakaoMap() {
   if (typeof kakao === 'undefined' || !kakao.maps) return;
   kakao.maps.load(() => {
     const container = document.getElementById('kakaoMap');
-    const map = new kakao.maps.Map(container, {
-      center: new kakao.maps.LatLng(37.5502, 127.0975),
-      level: 4
-    });
-
-    const geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(WEDDING_ADDRESS, (result, status) => {
-      if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        map.setCenter(coords);
-        new kakao.maps.Marker({ map, position: coords });
-        console.log('[좌표 확인용] WEDDING_LAT =', result[0].y, ' WEDDING_LNG =', result[0].x);
-      }
-    });
+    const coords = new kakao.maps.LatLng(WEDDING_LAT, WEDDING_LNG);
+    const map = new kakao.maps.Map(container, { center: coords, level: 4 });
+    new kakao.maps.Marker({ map, position: coords });
   });
 }
 initKakaoMap();
