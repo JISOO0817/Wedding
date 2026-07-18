@@ -218,10 +218,15 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   font-family: var(--serif-kr); font-size: 13px;
 }
 .cal-btn.google { background: var(--ink); color: var(--cream); }
-.countdown { display: flex; gap: 18px; margin: 25px 0 15px; }
-.countdown div { display: flex; flex-direction: column; align-items: center; }
-.countdown b { font-family: var(--serif-en); font-size: 30px; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; }
-.countdown span { font-size: 11px; color: var(--ink-soft); letter-spacing: 1px; }
+.countdown { display: flex; gap: 10px; margin: 25px 0 15px; }
+.cd-box {
+  flex: 1; aspect-ratio: 1 / 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  background: var(--cream); border: 1px solid var(--line); border-radius: 12px;
+  padding: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+.countdown b { font-family: var(--serif-en); font-size: 28px; font-weight: 600; line-height: 1; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
+.countdown span { font-size: 10px; color: var(--ink-soft); letter-spacing: 1px; text-transform: uppercase; }
 
 /* ============ 타임라인 ============ */
 .timeline { position: relative; width: 100%; }
