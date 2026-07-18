@@ -162,6 +162,7 @@
     <h2 class="section-title">우리가 함께 한 모든 순간</h2>
 
     <div class="gallery reveal" id="gallery"></div>
+    <button class="btn outline small gallery-more" id="galleryMoreBtn" onclick="expandGallery()" style="display:none;">더보기</button>
   </section>
 
   <!-- 갤러리 라이트박스 -->
@@ -182,15 +183,26 @@
     <span class="eyebrow lined">LOCATION</span>
     <h2 class="section-title">오시는 길</h2>
     <p class="address reveal">
-      서울 강남구 역삼동 680-1<br>청담 라움호텔 가든홀
+      서울 광진구 아차산로36길 5<br>KU 컨벤션 웨딩홀
     </p>
     <button class="btn outline small" onclick="location.href='tel:15442637'">안내 전화</button>
 
+    <!-- 별도 API 키 없이 쓸 수 있는 구글 지도 embed -->
+    <div class="map-embed reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=서울 광진구 아차산로36길 5 KU컨벤션웨딩홀&z=16&output=embed"
+        width="100%" height="280" style="border:0;" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
     <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
     <div class="map-links reveal">
-      <a href="https://map.naver.com/v5/search/서울 강남구 역삼동 680-1" target="_blank">네이버 지도</a>
-      <a href="https://map.kakao.com/link/search/서울 강남구 역삼동 680-1" target="_blank">카카오맵</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=서울 강남구 역삼동 680-1" target="_blank">구글 지도</a>
+      <a class="map-link" href="https://map.naver.com/v5/search/KU컨벤션 웨딩홀" target="_blank">
+        <span class="map-icon naver">N</span>네이버지도
+      </a>
+      <a class="map-link" href="https://map.kakao.com/link/search/KU컨벤션 웨딩홀" target="_blank">
+        <span class="map-icon kakao">K</span>카카오맵
+      </a>
     </div>
 
     <div class="info-accordion reveal">
@@ -220,12 +232,36 @@
 
     <form class="guestbook-form reveal" id="guestbookForm">
       <input type="text" id="gbName" placeholder="이름" maxlength="20" required>
+      <input type="password" id="gbPassword" placeholder="비밀번호 (삭제 시 필요)" maxlength="20" required>
       <textarea id="gbMessage" placeholder="따뜻한 축하 메시지를 남겨주세요" maxlength="200" required></textarea>
+      <p class="form-error" id="gbFormError"></p>
       <button type="submit" class="btn solid small" id="gbSubmitBtn">방명록 남기기</button>
     </form>
 
-    <ul class="guestbook reveal" id="guestbookList"></ul>
+    <div class="gb-list reveal" id="guestbookList"></div>
+    <button class="btn outline small gb-more" id="guestbookMoreBtn" onclick="openGuestbookModal()" style="display:none;">방명록 전체보기</button>
   </section>
+
+  <!-- 방명록 전체보기 모달 -->
+  <div class="modal" id="guestbookModal">
+    <div class="modal-inner guestbook-modal-inner">
+      <button class="modal-close" onclick="closeModal('guestbookModal')">✕</button>
+      <h3 class="modal-title">방명록 전체보기</h3>
+      <div class="gb-list gb-list-scroll" id="guestbookModalList"></div>
+    </div>
+  </div>
+
+  <!-- 방명록 삭제 모달 -->
+  <div class="modal" id="guestbookDeleteModal">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModal('guestbookDeleteModal')">✕</button>
+      <h3 class="modal-title">글 삭제</h3>
+      <p class="modal-sub">작성자 본인만 삭제할 수 있습니다. 비밀번호를 입력해주세요.</p>
+      <input type="password" id="gbDeletePassword" placeholder="비밀번호를 입력해 주세요">
+      <p class="modal-error" id="gbDeleteError"></p>
+      <button class="btn solid small" id="gbDeleteBtn" onclick="submitDeleteGuestbook()">삭제하기</button>
+    </div>
+  </div>
 
   <!-- ===================== 12. 마음 전하는 곳 (계좌번호) ===================== -->
   <section class="block center">

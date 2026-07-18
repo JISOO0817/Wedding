@@ -179,6 +179,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 .modal.open { display: flex; }
 .modal-inner {
   background: var(--cream); width: 85%; max-width: 420px; border-radius: 10px; padding: 30px 24px; position: relative;
+  max-height: 85vh; overflow-y: auto;
 }
 .modal-close {
   position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 16px; color: var(--ink-soft); cursor: pointer;
@@ -244,6 +245,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 
 /* ============ 갤러리 ============ */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
+.gallery-more { margin-top: 16px; }
 .gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer; }
 .lightbox { background: rgba(0,0,0,.5); }
 .lightbox-frame { position: relative; width: 100%; max-width: var(--site-width); }
@@ -271,11 +273,22 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 }
 
 /* ============ 오시는 길 ============ */
-.map-links { display: flex; gap: 10px; margin: 20px 0; }
-.map-links a {
-  flex: 1; border: 1px solid var(--ink); border-radius: 30px; padding: 9px 0; font-size: 12px;
-  color: var(--ink); text-decoration: none;
+.map-embed { width: 100%; margin: 24px 0 0; border-radius: var(--radius); overflow: hidden; }
+.map-embed iframe { display: block; width: 100%; }
+.map-links { display: flex; gap: 12px; margin: 20px 0; }
+.map-link {
+  flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--cream);
+  padding: 14px 10px; font-size: 13px; color: var(--ink); text-decoration: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06); white-space: nowrap;
 }
+.map-icon {
+  width: 24px; height: 24px; border-radius: 8px; color: #fff;
+  font-family: var(--serif-en); font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.map-icon.naver { background: #03c75a; }
+.map-icon.kakao { background: #fee500; color: #3c1e1e; }
 .info-accordion { width: 100%; margin-top: 20px; border-top: 1px dotted var(--line); }
 .acc-item { border-bottom: 1px dotted var(--line); padding: 16px 4px; text-align: left; font-size: 13px; line-height: 1.8; }
 .acc-item b { display: block; margin-bottom: 6px; }
@@ -299,10 +312,37 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 }
 .guestbook-form textarea { resize: vertical; min-height: 70px; }
 .guestbook-form button { align-self: center; }
-.guestbook { width: 100%; list-style: none; text-align: left; }
-.guestbook li { border-bottom: 1px dotted var(--line); padding: 16px 0; }
-.guestbook h4 { font-size: 13px; margin-bottom: 6px; }
-.guestbook p { font-size: 13px; color: var(--ink-soft); line-height: 1.7; }
+.form-error, .modal-error {
+  color: #c0392b; font-size: 12px; text-align: center; min-height: 14px; margin: -2px 0 2px;
+}
+
+.gb-list { width: 100%; display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.gb-card {
+  position: relative; background: var(--cream); border: 1px solid var(--line);
+  border-radius: 10px; padding: 18px 34px 16px 18px;
+}
+.gb-message { font-size: 13px; line-height: 1.7; color: var(--ink); white-space: pre-wrap; }
+.gb-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 14px; font-size: 11px; color: var(--ink-soft);
+}
+.gb-delete {
+  position: absolute; top: 12px; right: 12px; background: none; border: none;
+  color: var(--ink-soft); font-size: 13px; cursor: pointer; line-height: 1;
+}
+.gb-more { margin-top: 16px; }
+.gb-list-scroll { max-height: 60vh; overflow-y: auto; padding-right: 4px; }
+
+.guestbook-modal-inner { width: 90%; max-width: 480px; }
+.modal-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 6px; }
+.modal-sub { font-size: 12px; color: var(--ink-soft); text-align: center; margin-bottom: 16px; }
+#guestbookDeleteModal input {
+  width: 100%; border: 1px solid var(--line); border-radius: 8px; padding: 12px;
+  font-family: var(--serif-kr); font-size: 13px; color: var(--ink); background: var(--cream);
+  margin-bottom: 14px;
+}
+#guestbookModal .modal-title { display: block; }
+#guestbookDeleteModal #gbDeleteBtn { display: block; width: 100%; }
 
 /* ============ 계좌번호 ============ */
 .pay-box { width: 100%; margin-top: 20px; }

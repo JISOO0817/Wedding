@@ -8,7 +8,7 @@ const BRIDE_NAME = '지수';
 // TODO: 실제 구글폼 링크로 교체하세요
 const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
 
-const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyubuUD5S3O8BG4st5-kop2MM6d2VrmEQQe7WXfj5kK8dp7u9IUVWAuio2wi5ndWeiKSg/exec';
+const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJUTrPHb2vPnfDdpVclbogigcoTLQ0DideLDLk6S8NOWLBCJ3d5erJcKIc_Jw/exec';
 
 // ========================================================
 // 초기 진입 (히어로 인트로)
@@ -62,16 +62,22 @@ function initReveal() {
 // 모달
 // ========================================================
 let savedScrollY = 0;
+let openModalCount = 0;
 function openModal(id) {
-  savedScrollY = window.scrollY;
-  const html = document.documentElement;
-  html.style.position = 'fixed';
-  html.style.top = `-${savedScrollY}px`;
-  html.style.width = '100%';
+  if (openModalCount === 0) {
+    savedScrollY = window.scrollY;
+    const html = document.documentElement;
+    html.style.position = 'fixed';
+    html.style.top = `-${savedScrollY}px`;
+    html.style.width = '100%';
+  }
+  openModalCount++;
   document.getElementById(id).classList.add('open');
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
+  openModalCount = Math.max(0, openModalCount - 1);
+  if (openModalCount > 0) return;
   const html = document.documentElement;
   html.style.position = '';
   html.style.top = '';
@@ -199,10 +205,24 @@ const GALLERY_IMAGES = [
   'gallery6.jpg', 'gallery5.jpg', 'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'gallery10.jpg'
 ];
 let lightboxIndex = 0;
-function initGallery() {
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = GALLERY_IMAGES.map((f, i) =>
+const GALLERY_PREVIEW_COUNT = 9;
+let galleryExpanded = false;
+
+function renderGallery() {
+  const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
+  document.getElementById('gallery').innerHTML = items.map((f, i) =>
     `<img src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
+  document.getElementById('galleryMoreBtn').style.display =
+    (!galleryExpanded && GALLERY_IMAGES.length > GALLERY_PREVIEW_COUNT) ? 'inline-block' : 'none';
+}
+
+function initGallery() {
+  renderGallery();
+}
+
+function expandGallery() {
+  galleryExpanded = true;
+  renderGallery();
 }
 function renderLightbox() {
   document.getElementById('lightboxContent').innerHTML =
@@ -269,40 +289,132 @@ function escapeHTML(str) {
   return div.innerHTML;
 }
 
+const GUESTBOOK_PREVIEW_COUNT = 3;
+let guestbookData = [];
+let pendingDeleteId = null;
+
+function formatGuestbookTime(iso) {
+  const d = new Date(iso);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function renderGuestbookCard(item) {
+  return `
+    <div class="gb-card">
+      <button class="gb-delete" onclick="openDeleteGuestbook('${item.id}')">✕</button>
+      <p class="gb-message">${escapeHTML(item.message)}</p>
+      <div class="gb-meta">
+        <span class="gb-from">From ${escapeHTML(item.name)}</span>
+        <span class="gb-time">${formatGuestbookTime(item.time)}</span>
+      </div>
+    </div>`;
+}
+
+function renderGuestbookLists() {
+  document.getElementById('guestbookList').innerHTML =
+    guestbookData.slice(0, GUESTBOOK_PREVIEW_COUNT).map(renderGuestbookCard).join('');
+
+  document.getElementById('guestbookMoreBtn').style.display =
+    guestbookData.length > GUESTBOOK_PREVIEW_COUNT ? 'inline-block' : 'none';
+
+  if (document.getElementById('guestbookModal').classList.contains('open')) {
+    document.getElementById('guestbookModalList').innerHTML = guestbookData.map(renderGuestbookCard).join('');
+  }
+}
+
 async function loadGuestbook() {
   if (!GUESTBOOK_SCRIPT_URL) return;
   try {
     const res = await fetch(GUESTBOOK_SCRIPT_URL);
     const data = (await res.json()).filter(item => item.name && item.message);
-    if (!data.length) return;
-    document.getElementById('guestbookList').innerHTML = data.slice().reverse().map(item =>
-      `<li><h4>${escapeHTML(item.name)}</h4><p>${escapeHTML(item.message)}</p></li>`
-    ).join('');
+    guestbookData = data.reverse();
+    renderGuestbookLists();
   } catch (err) {
     console.error('방명록을 불러오지 못했습니다.', err);
   }
 }
 loadGuestbook();
 
+function openGuestbookModal() {
+  document.getElementById('guestbookModalList').innerHTML = guestbookData.map(renderGuestbookCard).join('');
+  openModal('guestbookModal');
+}
+
+function openDeleteGuestbook(id) {
+  pendingDeleteId = id;
+  document.getElementById('gbDeletePassword').value = '';
+  document.getElementById('gbDeleteError').textContent = '';
+  openModal('guestbookDeleteModal');
+}
+
+async function submitDeleteGuestbook() {
+  const password = document.getElementById('gbDeletePassword').value;
+  const errorEl = document.getElementById('gbDeleteError');
+  if (!password) return;
+  errorEl.textContent = '';
+
+  const btn = document.getElementById('gbDeleteBtn');
+  btn.disabled = true;
+  btn.textContent = '삭제 중...';
+
+  try {
+    const res = await fetch(GUESTBOOK_SCRIPT_URL, {
+      method: 'POST',
+      body: new URLSearchParams({ action: 'delete', id: pendingDeleteId, password })
+    });
+    const result = await res.json();
+    if (result.result === 'success') {
+      guestbookData = guestbookData.filter(item => item.id !== pendingDeleteId);
+      renderGuestbookLists();
+      closeModal('guestbookDeleteModal');
+    } else {
+      errorEl.textContent = result.message || '삭제에 실패했습니다.';
+    }
+  } catch (err) {
+    errorEl.textContent = '삭제 중 오류가 발생했습니다.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '삭제하기';
+  }
+}
+
 document.getElementById('guestbookForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  const errorEl = document.getElementById('gbFormError');
+  errorEl.textContent = '';
   if (!GUESTBOOK_SCRIPT_URL) {
-    alert('방명록 저장소가 아직 연결되지 않았습니다.');
+    errorEl.textContent = '방명록 저장소가 아직 연결되지 않았습니다.';
     return;
   }
   const name = document.getElementById('gbName').value.trim();
+  const password = document.getElementById('gbPassword').value.trim();
   const message = document.getElementById('gbMessage').value.trim();
-  if (!name || !message) return;
+  if (!name || !password || !message) return;
 
-  await fetch(GUESTBOOK_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: new URLSearchParams({ name, message })
-  });
+  const btn = document.getElementById('gbSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '저장 중...';
 
-  document.getElementById('gbName').value = '';
-  document.getElementById('gbMessage').value = '';
-  loadGuestbook();
+  try {
+    const res = await fetch(GUESTBOOK_SCRIPT_URL, {
+      method: 'POST',
+      body: new URLSearchParams({ action: 'add', name, message, password })
+    });
+    const result = await res.json();
+
+    guestbookData.unshift({ id: result.id, time: new Date().toISOString(), name, message });
+    renderGuestbookLists();
+
+    document.getElementById('gbName').value = '';
+    document.getElementById('gbPassword').value = '';
+    document.getElementById('gbMessage').value = '';
+  } catch (err) {
+    errorEl.textContent = '방명록 등록에 실패했습니다. 다시 시도해주세요.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '방명록 남기기';
+  }
 });
 
 // ========================================================
