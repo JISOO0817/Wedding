@@ -224,7 +224,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   color: var(--ink-soft); text-transform: uppercase;
 }
 .calendar-month { font-family: var(--serif-kr); font-size: 15px; font-weight: 600; margin: 34px 0 14px; }
-.calendar { width: 100%; margin: 0 0 20px; }
+.calendar { width: 100%; max-width: 380px; margin: 0 auto 20px; }
 .calendar table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: 13px; }
 .calendar th { color: var(--ink-soft); font-weight: 400; padding: 6px 0; }
 .calendar td { padding: 8px 0; text-align: center; position: relative; font-variant-numeric: lining-nums tabular-nums; }
