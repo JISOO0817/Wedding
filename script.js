@@ -188,6 +188,31 @@ function addToGoogleCalendar() {
 }
 
 // ========================================================
+// 카카오맵
+// ========================================================
+const WEDDING_ADDRESS = '서울 광진구 아차산로36길 5';
+function initKakaoMap() {
+  if (typeof kakao === 'undefined' || !kakao.maps) return;
+  kakao.maps.load(() => {
+    const container = document.getElementById('kakaoMap');
+    const map = new kakao.maps.Map(container, {
+      center: new kakao.maps.LatLng(37.5502, 127.0975),
+      level: 4
+    });
+
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.addressSearch(WEDDING_ADDRESS, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        map.setCenter(coords);
+        new kakao.maps.Marker({ map, position: coords });
+      }
+    });
+  });
+}
+initKakaoMap();
+
+// ========================================================
 // 카운트다운 + D-day 메시지
 // ========================================================
 function updateCountdown() {

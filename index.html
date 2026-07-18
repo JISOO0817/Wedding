@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020&libraries=services"></script>
 </head>
 <body>
 
@@ -196,12 +197,9 @@
     </p>
     <button class="btn outline small" onclick="location.href='tel:15442637'">안내 전화</button>
 
-    <!-- 별도 API 키 없이 쓸 수 있는 구글 지도 embed -->
+    <!-- 카카오맵 -->
     <div class="map-embed reveal">
-      <iframe
-        src="https://maps.google.com/maps?q=서울 광진구 아차산로36길 5 KU컨벤션웨딩홀&z=16&output=embed"
-        width="100%" height="280" style="border:0;" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div id="kakaoMap"></div>
     </div>
 
     <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
@@ -209,8 +207,8 @@
       <a class="map-link" href="https://map.naver.com/v5/search/KU컨벤션 웨딩홀" target="_blank">
         <span class="map-icon naver">N</span>네이버지도
       </a>
-      <a class="map-link" href="https://map.kakao.com/link/search/KU컨벤션 웨딩홀" target="_blank">
-        <span class="map-icon kakao">K</span>카카오맵
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=KU컨벤션 웨딩홀" target="_blank">
+        <span class="map-icon google">G</span>구글맵
       </a>
     </div>
 

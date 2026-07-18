@@ -299,6 +299,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 /* ============ 오시는 길 ============ */
 .map-embed { width: 100%; margin: 24px 0 0; border-radius: var(--radius); overflow: hidden; }
 .map-embed iframe { display: block; width: 100%; }
+#kakaoMap { width: 100%; height: 280px; }
 .map-links { display: flex; gap: 12px; margin: 20px 0; }
 .map-link {
   flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -312,7 +313,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .map-icon.naver { background: #03c75a; }
-.map-icon.kakao { background: #fee500; color: #3c1e1e; }
+.map-icon.google { background: #4285f4; }
 .info-accordion { width: 100%; margin-top: 20px; border-top: 1px dotted var(--line); }
 .acc-item { border-bottom: 1px dotted var(--line); padding: 16px 4px; text-align: left; font-size: 13px; line-height: 1.8; }
 .acc-item b { display: block; margin-bottom: 6px; }
