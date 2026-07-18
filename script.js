@@ -61,8 +61,23 @@ function initReveal() {
 // ========================================================
 // 모달
 // ========================================================
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+let savedScrollY = 0;
+function openModal(id) {
+  savedScrollY = window.scrollY;
+  const html = document.documentElement;
+  html.style.position = 'fixed';
+  html.style.top = `-${savedScrollY}px`;
+  html.style.width = '100%';
+  document.getElementById(id).classList.add('open');
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  const html = document.documentElement;
+  html.style.position = '';
+  html.style.top = '';
+  html.style.width = '';
+  window.scrollTo(0, savedScrollY);
+}
 
 // ========================================================
 // 날짜 하이라이트 + 캘린더 렌더링
@@ -219,6 +234,11 @@ window.addEventListener('wheel', (e) => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
 
+// 라이트박스가 열려있는 동안 마우스 휠 스크롤 차단
+window.addEventListener('wheel', (e) => {
+  if (document.getElementById('lightbox').classList.contains('open')) e.preventDefault();
+}, { passive: false });
+
 // ========================================================
 // 계좌번호 아코디언 + 복사
 // ========================================================
@@ -306,3 +326,16 @@ function copyLink() {
 
 // 우클릭(이미지 저장) 방지 - 필요 없으면 이 블록 삭제하세요
 document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// 개발자 도구 단축키 차단 (F12, Ctrl+Shift+I/J/C, Ctrl+U) - 완벽 차단은 아닌 가벼운 방어용입니다
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toLowerCase();
+  const blocked =
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) ||
+    (e.ctrlKey && key === 'u');
+  if (blocked) {
+    e.preventDefault();
+    alert('개발자 도구는 사용할 수 없습니다.');
+  }
+});

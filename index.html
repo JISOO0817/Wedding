@@ -54,8 +54,8 @@
     </div>
 
     <div class="family-line reveal">
-      <p>박윤석 · 유미숙 의 장남 <strong>성훈</strong></p>
-      <p>김정길 · 신혜정 의 장녀 <strong>나영</strong></p>
+      <p>권형렬 · 이경진 의 장남 <strong>재원</strong></p>
+      <p>전경표 · 이태선 의 차녀 <strong>지수</strong></p>
     </div>
 
     <button class="btn outline" onclick="openModal('contactModal')">연락하기</button>
@@ -166,8 +166,10 @@
 
   <!-- 갤러리 라이트박스 -->
   <div class="modal lightbox" id="lightbox">
-    <button class="modal-close" onclick="closeModal('lightbox')">✕</button>
-    <div class="lightbox-content" id="lightboxContent"></div>
+    <div class="lightbox-frame">
+      <button class="modal-close" onclick="closeModal('lightbox')">✕</button>
+      <div class="lightbox-content" id="lightboxContent"></div>
+    </div>
     <div class="lightbox-footer">
       <button class="lightbox-nav prev" onclick="moveLightbox(-1)">‹</button>
       <span class="lightbox-counter" id="lightboxCounter"></span>
@@ -207,21 +209,6 @@
     </div>
   </section>
 
-  <!-- ===================== 10. 참석 여부 (RSVP) =====================
-       GitHub Pages는 정적 호스팅이라 서버 저장이 불가능합니다.
-       아래 버튼의 href를 본인 구글폼 링크로 교체하세요.
-       (구글폼 만들기: forms.google.com → 새 양식 → 성함/참석여부/인원 질문 추가)
-  -->
-  <section class="block center">
-    <span class="eyebrow lined">R/S/V/P</span>
-    <h2 class="section-title">참석 여부</h2>
-    <p class="reveal">
-      특별한 날 축하하는 마음으로 참석해 주시는 모든 분들을<br>
-      귀하게 모실 수 있도록 참석 여부 전달을 꼭 부탁드립니다.
-    </p>
-    <a class="btn solid" href="#" id="rsvpLink" target="_blank">참석 여부 전달하기</a>
-    <p class="hint">* 아직 폼이 연결되지 않았어요. index.html의 #rsvpLink href를 본인 구글폼 주소로 바꿔주세요.</p>
-  </section>
 
   <!-- ===================== 11. 방명록 =====================
        Google Apps Script 웹앱을 통해 Google 시트에 실시간 저장됩니다.
