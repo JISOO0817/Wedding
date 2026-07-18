@@ -271,11 +271,18 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
 .gallery-more { margin-top: 16px; }
 .gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer; }
-.lightbox { background: rgba(0,0,0,.5); }
+.lightbox { background: rgba(0,0,0,.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 .lightbox-frame { position: relative; width: 100%; max-width: var(--site-width); }
-.lightbox-content { width: 100%; touch-action: pan-y; cursor: grab; }
-.lightbox-content img { display: block; width: auto; height: auto; max-width: 100%; max-height: 90vh; margin: 0 auto; }
-.lightbox.zoomed .lightbox-content img { filter: blur(20px); }
+.lightbox-content {
+  width: 100%; height: 90vh; touch-action: none; cursor: grab;
+  position: relative; overflow: hidden;
+}
+.lb-slide {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%; object-fit: contain;
+  transition: transform .5s ease-out;
+}
+.lightbox.zoomed .lb-slide { filter: blur(20px); }
 .lightbox .modal-close {
   position: absolute; top: -42px; right: 0;
   background: rgba(0,0,0,.4); color: #fff; border-radius: 50%;

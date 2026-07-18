@@ -206,6 +206,7 @@ function initKakaoMap() {
         const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         map.setCenter(coords);
         new kakao.maps.Marker({ map, position: coords });
+        console.log('[좌표 확인용] WEDDING_LAT =', result[0].y, ' WEDDING_LNG =', result[0].x);
       }
     });
   });
@@ -270,7 +271,7 @@ function expandGallery() {
 }
 function renderLightbox() {
   document.getElementById('lightboxContent').innerHTML =
-    `<img src="images/${GALLERY_IMAGES[lightboxIndex]}" alt="갤러리 사진 확대">`;
+    `<img class="lb-slide" src="images/${GALLERY_IMAGES[lightboxIndex]}" alt="갤러리 사진 확대">`;
   document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
 }
 function openLightbox(i) {
@@ -278,39 +279,141 @@ function openLightbox(i) {
   renderLightbox();
   openModal('lightbox');
 }
+
+let lightboxTransitionTimer = null;
 function moveLightbox(delta) {
-  lightboxIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-  renderLightbox();
+  const content = document.getElementById('lightboxContent');
+
+  // 이전 전환이 끝나기 전에 또 넘기면, 남아있던 이전 이미지를 즉시 정리
+  if (lightboxTransitionTimer) {
+    clearTimeout(lightboxTransitionTimer);
+    lightboxTransitionTimer = null;
+    const stale = content.querySelectorAll('img');
+    if (stale.length > 1) stale[0].remove();
+  }
+
+  const oldImg = content.querySelector('img');
+  const newIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+
+  const newImg = document.createElement('img');
+  newImg.className = 'lb-slide';
+  newImg.alt = '갤러리 사진 확대';
+  newImg.style.transform = `translateX(${delta > 0 ? '100%' : '-100%'})`;
+  newImg.src = `images/${GALLERY_IMAGES[newIndex]}`;
+  content.appendChild(newImg);
+
+  void newImg.offsetWidth; // 강제 리플로우로 transition이 적용되게 함
+
+  if (oldImg) oldImg.style.transform = `translateX(${delta > 0 ? '-100%' : '100%'})`;
+  newImg.style.transform = 'translateX(0)';
+
+  lightboxIndex = newIndex;
+  document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
+
+  lightboxTransitionTimer = setTimeout(() => {
+    if (oldImg) oldImg.remove();
+    lightboxTransitionTimer = null;
+  }, 500);
 }
 
-// 라이트박스 스와이프/드래그로 사진 넘기기 (터치, 마우스 공통)
+// 라이트박스 드래그로 사진 넘기기 (터치, 마우스 공통) - 손가락/마우스 위치를 따라 실시간으로 넘어감
 (function () {
   const content = document.getElementById('lightboxContent');
-  let startX = 0;
-  let startY = 0;
-  let dragging = false;
+  let startX = 0, startY = 0, dragging = false, dragDeltaX = 0;
+  let curImg = null, prevPreview = null, nextPreview = null;
+
+  function clearPreviews() {
+    if (prevPreview) { prevPreview.remove(); prevPreview = null; }
+    if (nextPreview) { nextPreview.remove(); nextPreview = null; }
+  }
 
   content.addEventListener('pointerdown', (e) => {
+    if (lightboxTransitionTimer) return; // 버튼 전환 중에는 드래그 무시
     dragging = true;
     startX = e.clientX;
     startY = e.clientY;
+    dragDeltaX = 0;
+    curImg = content.querySelector('.lb-slide');
     content.style.cursor = 'grabbing';
   });
+
+  content.addEventListener('pointermove', (e) => {
+    if (!dragging || !curImg) return;
+    dragDeltaX = e.clientX - startX;
+    if (Math.abs(dragDeltaX) < 4) return;
+
+    curImg.style.transition = 'none';
+    curImg.style.transform = `translateX(${dragDeltaX}px)`;
+
+    const w = content.offsetWidth;
+    if (dragDeltaX < 0 && !nextPreview) {
+      const nextIndex = (lightboxIndex + 1) % GALLERY_IMAGES.length;
+      nextPreview = document.createElement('img');
+      nextPreview.className = 'lb-slide';
+      nextPreview.style.transition = 'none';
+      nextPreview.alt = '갤러리 사진 확대';
+      nextPreview.src = `images/${GALLERY_IMAGES[nextIndex]}`;
+      content.appendChild(nextPreview);
+    }
+    if (dragDeltaX > 0 && !prevPreview) {
+      const prevIndex = (lightboxIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+      prevPreview = document.createElement('img');
+      prevPreview.className = 'lb-slide';
+      prevPreview.style.transition = 'none';
+      prevPreview.alt = '갤러리 사진 확대';
+      prevPreview.src = `images/${GALLERY_IMAGES[prevIndex]}`;
+      content.appendChild(prevPreview);
+    }
+    if (nextPreview) nextPreview.style.transform = `translateX(${w + dragDeltaX}px)`;
+    if (prevPreview) prevPreview.style.transform = `translateX(${-w + dragDeltaX}px)`;
+  });
+
+  function commitDrag(delta) {
+    const newIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    if (curImg) curImg.style.transform = `translateX(${delta > 0 ? '-100%' : '100%'})`;
+    if (delta > 0 && nextPreview) nextPreview.style.transform = 'translateX(0)';
+    if (delta < 0 && prevPreview) prevPreview.style.transform = 'translateX(0)';
+
+    lightboxIndex = newIndex;
+    document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
+
+    const staleImg = curImg;
+    const staleOther = delta > 0 ? prevPreview : nextPreview;
+    setTimeout(() => {
+      if (staleImg) staleImg.remove();
+      if (staleOther) staleOther.remove();
+    }, 500);
+  }
+
+  function releaseDrag(dy) {
+    const w = content.offsetWidth;
+    if (curImg) curImg.style.transition = '';
+    if (nextPreview) nextPreview.style.transition = '';
+    if (prevPreview) prevPreview.style.transition = '';
+
+    if (Math.abs(dragDeltaX) > 60 && Math.abs(dragDeltaX) > Math.abs(dy)) {
+      commitDrag(dragDeltaX < 0 ? 1 : -1);
+    } else {
+      if (curImg) curImg.style.transform = 'translateX(0)';
+      if (nextPreview) nextPreview.style.transform = `translateX(${w}px)`;
+      if (prevPreview) prevPreview.style.transform = `translateX(${-w}px)`;
+      setTimeout(clearPreviews, 500);
+    }
+    curImg = null;
+  }
 
   content.addEventListener('pointerup', (e) => {
     if (!dragging) return;
     dragging = false;
     content.style.cursor = 'grab';
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-      moveLightbox(dx < 0 ? 1 : -1);
-    }
+    releaseDrag(e.clientY - startY);
   });
 
   content.addEventListener('pointercancel', () => {
+    if (!dragging) return;
     dragging = false;
     content.style.cursor = 'grab';
+    releaseDrag(0);
   });
 })();
 
