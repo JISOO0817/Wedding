@@ -37,7 +37,7 @@
 
   <!-- ===================== 2. 초대 문구 ===================== -->
   <section class="block center">
-    <span class="eyebrow">INVITATION</span>
+    <span class="eyebrow lined">INVITATION</span>
     <p class="quote reveal">
       서로의 이름을 부르는 것만으로도<br>
       사랑의 깊이를 확인할 수 있는<br>
@@ -83,10 +83,22 @@
 
   <!-- ===================== 3. 웨딩데이 / 카운트다운 ===================== -->
   <section class="block center alt-bg">
-    <span class="eyebrow">WEDDING DAY</span>
-    <p class="date-line reveal">2026년 9월 19일 토요일 오전 11시</p>
+    <span class="eyebrow lined">WEDDING DAY</span>
 
+    <div class="date-hero reveal">
+      <span class="date-hero-day" id="dateHeroDay"></span>
+      <span class="date-hero-month" id="dateHeroMonth"></span>
+    </div>
+    <p class="date-line reveal">2026년 9월 19일 토요일 오전 11시</p>
+    <p class="venue-line reveal">ku컨벤션 웨딩홀</p>
+
+    <h3 class="calendar-month reveal" id="calendarMonth"></h3>
     <div class="calendar reveal" id="calendar"></div>
+
+    <div class="calendar-actions reveal">
+      <button class="cal-btn google" onclick="addToGoogleCalendar()">📅 Google 캘린더에 추가</button>
+      <button class="cal-btn ics" onclick="downloadICS()">📅 아이폰 캘린더에 추가 (.ics)</button>
+    </div>
 
     <div class="countdown reveal" id="countdown">
       <div><b id="cd-days">00</b><span>Days</span></div>
@@ -98,36 +110,9 @@
     <p class="dday-line reveal" id="ddayMessage">재원 ♥ 지수 님의 결혼식이 <b id="ddayNum">-</b>일 남았습니다.</p>
   </section>
 
-  <!-- ===================== 4. 신랑 신부 소개 ===================== -->
-  <section class="block center">
-    <span class="eyebrow">INTRODUCTION</span>
-    <h2 class="section-title">신랑 & 신부 소개</h2>
-
-    <div class="intro-photos reveal">
-      <div class="img-placeholder round-img"><span>신랑 사진</span></div>
-      <div class="heart-divider">♥</div>
-      <div class="img-placeholder round-img"><span>신부 사진</span></div>
-    </div>
-
-    <div class="intro-cards reveal">
-      <div class="intro-card">
-        <span class="intro-label">Groom</span>
-        <h3>이 재 원</h3>
-        <span class="tag tag-blue">#ENFP</span>
-        <p>이형렬 · 이경진 아들<br>1992년 07월 27일, 수원<br>소프트웨어 개발자</p>
-      </div>
-      <div class="intro-card">
-        <span class="intro-label">Bride</span>
-        <h3>전 지 수</h3>
-        <span class="tag tag-pink">#INTJ</span>
-        <p>전경표 · 이태선의 딸<br>1996년 08월 17일, 서울<br>디지털 마케팅 전문가</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ===================== 5. 우리의 타임라인 ===================== -->
   <section class="block center alt-bg">
-    <span class="eyebrow">OUR TIMELINE</span>
+    <span class="eyebrow lined">OUR TIMELINE</span>
     <h2 class="section-title">우리가 걸어온 그 길</h2>
 
     <div class="timeline reveal">
@@ -172,7 +157,7 @@
 
   <!-- ===================== 7. 갤러리 ===================== -->
   <section class="block center alt-bg">
-    <span class="eyebrow">GALLERY</span>
+    <span class="eyebrow lined">GALLERY</span>
     <h2 class="section-title">우리가 함께 한 모든 순간</h2>
 
     <div class="gallery reveal" id="gallery"></div>
@@ -191,7 +176,7 @@
 
   <!-- ===================== 8. 오시는 길 ===================== -->
   <section class="block center">
-    <span class="eyebrow">LOCATION</span>
+    <span class="eyebrow lined">LOCATION</span>
     <h2 class="section-title">오시는 길</h2>
     <p class="address reveal">
       서울 강남구 역삼동 680-1<br>청담 라움호텔 가든홀
@@ -227,7 +212,7 @@
        (구글폼 만들기: forms.google.com → 새 양식 → 성함/참석여부/인원 질문 추가)
   -->
   <section class="block center">
-    <span class="eyebrow">R/S/V/P</span>
+    <span class="eyebrow lined">R/S/V/P</span>
     <h2 class="section-title">참석 여부</h2>
     <p class="reveal">
       특별한 날 축하하는 마음으로 참석해 주시는 모든 분들을<br>
@@ -238,26 +223,25 @@
   </section>
 
   <!-- ===================== 11. 방명록 =====================
-       정적 사이트라 새 글 저장은 안 됩니다. 예시글만 보여주고,
-       새 글 작성은 방명록용 구글폼으로 연결하는 걸 추천드려요.
+       Google Apps Script 웹앱을 통해 Google 시트에 실시간 저장됩니다.
+       script.js 상단의 GUESTBOOK_SCRIPT_URL 값을 배포된 웹앱 주소로 바꿔주세요.
   -->
   <section class="block center alt-bg">
-    <span class="eyebrow">GUEST BOOK</span>
+    <span class="eyebrow lined">GUEST BOOK</span>
     <h2 class="section-title">방명록</h2>
 
-    <ul class="guestbook reveal">
-      <li><h4>김지은</h4><p>두 분의 결혼을 진심으로 축하드립니다! 언제나 행복 가득한 가정 이루시길 바라며, 멋진 미래를 함께 걸어가세요. 너무 예쁜 커플이에요💐</p></li>
-      <li><h4>장영수</h4><p>두 사람의 결혼을 정말 축하해요! 이제 둘만의 길을 함께 걸어갈 거라 생각하니 너무 기쁘네요. 늘 웃음 가득한 가정 되세요! 🎉</p></li>
-      <li><h4>박소연</h4><p>나영이, 성훈이 결혼 진심으로 축하해요! 항상 서로 아껴주고 사랑하며 행복하게 지내길 바래요. 그대들의 앞날에 많은 축복이 함께하길! 🌹</p></li>
-    </ul>
+    <form class="guestbook-form reveal" id="guestbookForm">
+      <input type="text" id="gbName" placeholder="이름" maxlength="20" required>
+      <textarea id="gbMessage" placeholder="따뜻한 축하 메시지를 남겨주세요" maxlength="200" required></textarea>
+      <button type="submit" class="btn solid small" id="gbSubmitBtn">방명록 남기기</button>
+    </form>
 
-    <a class="btn outline" href="#" id="guestbookLink" target="_blank">방명록 작성하기</a>
-    <p class="hint">* #guestbookLink href를 방명록용 구글폼 주소로 바꿔주세요.</p>
+    <ul class="guestbook reveal" id="guestbookList"></ul>
   </section>
 
   <!-- ===================== 12. 마음 전하는 곳 (계좌번호) ===================== -->
   <section class="block center">
-    <span class="eyebrow">THANKS TO</span>
+    <span class="eyebrow lined">THANKS TO</span>
     <h2 class="section-title">마음 전하는 곳</h2>
 
     <div class="pay-box reveal">

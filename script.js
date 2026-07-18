@@ -7,7 +7,8 @@ const BRIDE_NAME = '지수';
 
 // TODO: 실제 구글폼 링크로 교체하세요
 const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
-const GUESTBOOK_FORM_URL = '';  // 예: 'https://forms.gle/yyyyyyyy'
+
+const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyubuUD5S3O8BG4st5-kop2MM6d2VrmEQQe7WXfj5kK8dp7u9IUVWAuio2wi5ndWeiKSg/exec';
 
 // ========================================================
 // 초기 진입 (히어로 인트로)
@@ -64,13 +65,23 @@ function openModal(id) { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
 // ========================================================
-// 캘린더 렌더링
+// 날짜 하이라이트 + 캘린더 렌더링
 // ========================================================
+const MONTH_ABBR = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+
+function buildDateHero() {
+  document.getElementById('dateHeroDay').textContent = WEDDING_DATE.getDate();
+  document.getElementById('dateHeroMonth').textContent = MONTH_ABBR[WEDDING_DATE.getMonth()];
+}
+buildDateHero();
+
 function buildCalendar() {
   const year = WEDDING_DATE.getFullYear();
   const month = WEDDING_DATE.getMonth();
   const firstDay = new Date(year, month, 1).getDay();
   const lastDate = new Date(year, month + 1, 0).getDate();
+
+  document.getElementById('calendarMonth').textContent = `${year}년 ${month + 1}월`;
 
   let html = '<table><thead><tr>';
   ['일','월','화','수','목','금','토'].forEach(d => html += `<th>${d}</th>`);
@@ -79,8 +90,12 @@ function buildCalendar() {
   for (let i = 0; i < firstDay; i++) html += '<td></td>';
 
   for (let d = 1; d <= lastDate; d++) {
-    const isToday = d === WEDDING_DATE.getDate();
-    html += `<td class="${isToday ? 'today' : ''}"><span>${d}</span></td>`;
+    const dow = (firstDay + d - 1) % 7;
+    const classes = [];
+    if (d === WEDDING_DATE.getDate()) classes.push('today');
+    if (dow === 0) classes.push('sun');
+    if (dow === 6) classes.push('sat');
+    html += `<td class="${classes.join(' ')}"><span>${d}</span></td>`;
     if ((firstDay + d) % 7 === 0) html += '</tr><tr>';
   }
   html += '</tr></tbody></table>';
@@ -88,6 +103,49 @@ function buildCalendar() {
   document.getElementById('calendar').innerHTML = html;
 }
 buildCalendar();
+
+// ========================================================
+// 캘린더에 추가 (Google / iOS .ics)
+// ========================================================
+const WEDDING_VENUE = 'ku컨벤션 웨딩홀';
+function toUTCStamp(date) {
+  return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+}
+function addToGoogleCalendar() {
+  const start = WEDDING_DATE;
+  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼식`,
+    dates: `${toUTCStamp(start)}/${toUTCStamp(end)}`,
+    details: '저희 두 사람의 결혼식에 초대합니다.',
+    location: WEDDING_VENUE
+  });
+  window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
+}
+function downloadICS() {
+  const start = WEDDING_DATE;
+  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    `DTSTART:${toUTCStamp(start)}`,
+    `DTEND:${toUTCStamp(end)}`,
+    `SUMMARY:${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼식`,
+    `LOCATION:${WEDDING_VENUE}`,
+    'DESCRIPTION:저희 두 사람의 결혼식에 초대합니다.',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'wedding.ics';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 // ========================================================
 // 카운트다운 + D-day 메시지
@@ -172,13 +230,56 @@ function copyAccount(text) {
 }
 
 // ========================================================
-// RSVP / 방명록 링크 연결
+// RSVP 링크 연결
 // ========================================================
 document.addEventListener('DOMContentLoaded', () => {
   const rsvp = document.getElementById('rsvpLink');
-  const guestbook = document.getElementById('guestbookLink');
   if (RSVP_FORM_URL) rsvp.href = RSVP_FORM_URL;
-  if (GUESTBOOK_FORM_URL) guestbook.href = GUESTBOOK_FORM_URL;
+});
+
+// ========================================================
+// 방명록 (Google Apps Script 연동)
+// ========================================================
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+async function loadGuestbook() {
+  if (!GUESTBOOK_SCRIPT_URL) return;
+  try {
+    const res = await fetch(GUESTBOOK_SCRIPT_URL);
+    const data = (await res.json()).filter(item => item.name && item.message);
+    if (!data.length) return;
+    document.getElementById('guestbookList').innerHTML = data.slice().reverse().map(item =>
+      `<li><h4>${escapeHTML(item.name)}</h4><p>${escapeHTML(item.message)}</p></li>`
+    ).join('');
+  } catch (err) {
+    console.error('방명록을 불러오지 못했습니다.', err);
+  }
+}
+loadGuestbook();
+
+document.getElementById('guestbookForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!GUESTBOOK_SCRIPT_URL) {
+    alert('방명록 저장소가 아직 연결되지 않았습니다.');
+    return;
+  }
+  const name = document.getElementById('gbName').value.trim();
+  const message = document.getElementById('gbMessage').value.trim();
+  if (!name || !message) return;
+
+  await fetch(GUESTBOOK_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: new URLSearchParams({ name, message })
+  });
+
+  document.getElementById('gbName').value = '';
+  document.getElementById('gbMessage').value = '';
+  loadGuestbook();
 });
 
 // ========================================================
