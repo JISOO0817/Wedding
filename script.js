@@ -4,6 +4,7 @@
 const WEDDING_DATE = new Date('2026-09-19T11:00:00+09:00');
 const GROOM_NAME = '재원';
 const BRIDE_NAME = '지수';
+const HOLIDAYS = [24, 25, 26]; // 캘린더에 빨간색으로 표시할 이번 달 공휴일 날짜
 
 // TODO: 실제 구글폼 링크로 교체하세요
 const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
@@ -154,11 +155,13 @@ function buildCalendar() {
 
   for (let d = 1; d <= lastDate; d++) {
     const dow = (firstDay + d - 1) % 7;
+    const isWeddingDay = d === WEDDING_DATE.getDate();
     const classes = [];
-    if (d === WEDDING_DATE.getDate()) classes.push('today');
+    if (isWeddingDay) classes.push('today');
     if (dow === 0) classes.push('sun');
-    if (dow === 6) classes.push('sat');
-    html += `<td class="${classes.join(' ')}"><span>${d}</span></td>`;
+    if (HOLIDAYS.includes(d)) classes.push('holiday');
+    const label = isWeddingDay ? '♥' : d;
+    html += `<td class="${classes.join(' ')}"><span>${label}</span></td>`;
     if ((firstDay + d) % 7 === 0) html += '</tr><tr>';
   }
   html += '</tr></tbody></table>';
