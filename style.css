@@ -187,9 +187,20 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 }
 .contact-grid { display: flex; flex-direction: column; gap: 22px; }
 .contact-side h4 { font-size: 12px; color: var(--rose); letter-spacing: 2px; margin-bottom: 10px; }
-.contact-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 14px; }
-.contact-row span { color: var(--ink-soft); width: 45px; }
-.contact-row a { margin-left: auto; text-decoration: none; }
+.contact-card {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--cream); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+}
+.contact-card + .contact-card { margin-top: 8px; }
+.contact-info { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.contact-info span { color: var(--ink-soft); min-width: 48px; white-space: nowrap; flex-shrink: 0; }
+.contact-call {
+  width: 34px; height: 34px; border-radius: 50%; background: var(--cream); color: var(--ink-soft);
+  border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; flex-shrink: 0;
+}
 
 /* ============ 날짜 하이라이트 / 캘린더 / 카운트다운 ============ */
 .date-hero { display: flex; align-items: baseline; justify-content: center; gap: 8px; }
