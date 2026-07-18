@@ -109,13 +109,6 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
   border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.12);
 }
-.hero-caption {
-  padding: 40px 20px;
-  text-align: center;
-  font-size: 16px;
-  line-height: 1.9;
-  letter-spacing: -0.2px;
-}
 
 /* ============ 히어로 인트로 (텍스트 라이트) ============ */
 .hero-intro {
