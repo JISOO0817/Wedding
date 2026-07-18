@@ -16,7 +16,7 @@ const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJ
 window.addEventListener('load', () => {
   initGallery();
   initReveal();
-  initSparkles();
+  initPetals();
 
   setTimeout(() => {
     document.querySelectorAll('.hero-img').forEach((img) => img.classList.add('sharp'));
@@ -25,21 +25,23 @@ window.addEventListener('load', () => {
 });
 
 // ========================================================
-// 히어로 빛 파티클 애니메이션
+// 히어로 꽃잎 애니메이션
 // ========================================================
-function initSparkles() {
-  const container = document.getElementById('sparkles');
-  const count = 22;
+function initPetals() {
+  const container = document.getElementById('petals');
+  const colors = ['#fff', 'var(--rose-soft)'];
+  const count = 16;
   let html = '';
   for (let i = 0; i < count; i++) {
     const left = Math.random() * 100;
-    const size = 3 + Math.random() * 6;
-    const duration = 8 + Math.random() * 8;
+    const size = 8 + Math.random() * 6;
+    const duration = 16 + Math.random() * 12;
     const delay = -(Math.random() * duration);
     const drift = Math.round(Math.random() * 50 - 25);
-    const opacity = (0.4 + Math.random() * 0.5).toFixed(2);
-    const blur = Math.random() > 0.5 ? 'blur(0.5px)' : 'none';
-    html += `<div class="spark" style="left:${left}%; width:${size}px; height:${size}px; filter:${blur}; box-shadow:0 0 ${size}px ${size / 2}px rgba(255,255,255,.85); animation-duration:${duration}s; animation-delay:${delay}s; --drift:${drift}px; --spark-opacity:${opacity};"></div>`;
+    const rotateDir = Math.random() > 0.5 ? 1 : -1;
+    const opacity = (0.6 + Math.random() * 0.3).toFixed(2);
+    const color = colors[i % colors.length];
+    html += `<div class="petal" style="left:${left}%; width:${size}px; height:${size * 1.3}px; background:${color}; animation-duration:${duration}s; animation-delay:${delay}s; --drift:${drift}px; --rotate-dir:${rotateDir}; --petal-opacity:${opacity};"></div>`;
   }
   container.innerHTML = html;
 }
