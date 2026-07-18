@@ -247,7 +247,6 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   background: var(--line); transform: translateX(-50%);
 }
 .timeline-item { display: flex; align-items: center; gap: 16px; padding: 24px 0; position: relative; }
-.timeline-item.reverse { flex-direction: row-reverse; }
 .timeline-item > * { width: 50%; }
 .tl-dot {
   position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; background: var(--rose);
