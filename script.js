@@ -16,31 +16,30 @@ const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJ
 window.addEventListener('load', () => {
   initGallery();
   initReveal();
-  initLeaves();
+  initSparkles();
 
   setTimeout(() => {
-    document.getElementById('heroImg').classList.add('sharp');
+    document.querySelectorAll('.hero-img').forEach((img) => img.classList.add('sharp'));
     document.getElementById('heroIntro').classList.add('hide');
   }, 2000);
 });
 
 // ========================================================
-// 히어로 낙엽 애니메이션
+// 히어로 빛 파티클 애니메이션
 // ========================================================
-function initLeaves() {
-  const container = document.getElementById('leaves');
-  const colors = ['var(--leaf)', 'var(--leaf-soft)'];
-  const count = 16;
+function initSparkles() {
+  const container = document.getElementById('sparkles');
+  const count = 22;
   let html = '';
   for (let i = 0; i < count; i++) {
     const left = Math.random() * 100;
-    const size = 8 + Math.random() * 6;
-    const duration = 7 + Math.random() * 6;
+    const size = 3 + Math.random() * 6;
+    const duration = 8 + Math.random() * 8;
     const delay = -(Math.random() * duration);
-    const drift = Math.round(Math.random() * 60 - 30);
-    const rotateDir = Math.random() > 0.5 ? 1 : -1;
-    const color = colors[i % colors.length];
-    html += `<div class="leaf" style="left:${left}%; width:${size}px; height:${size * 1.3}px; background:${color}; animation-duration:${duration}s; animation-delay:${delay}s; --drift:${drift}px; --rotate-dir:${rotateDir};"></div>`;
+    const drift = Math.round(Math.random() * 50 - 25);
+    const opacity = (0.4 + Math.random() * 0.5).toFixed(2);
+    const blur = Math.random() > 0.5 ? 'blur(0.5px)' : 'none';
+    html += `<div class="spark" style="left:${left}%; width:${size}px; height:${size}px; filter:${blur}; box-shadow:0 0 ${size}px ${size / 2}px rgba(255,255,255,.85); animation-duration:${duration}s; animation-delay:${delay}s; --drift:${drift}px; --spark-opacity:${opacity};"></div>`;
   }
   container.innerHTML = html;
 }

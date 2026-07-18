@@ -6,8 +6,6 @@
   --cream-alt: #ececeb;
   --rose: #b98080;
   --rose-soft: #e9d3d3;
-  --leaf: #83996a;
-  --leaf-soft: #b3c39a;
   --line: rgba(0,0,0,0.14);
   --serif-en: 'Cormorant Garamond', serif;
   --serif-kr: 'Noto Serif KR', serif;
@@ -84,7 +82,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   border-radius: var(--radius);
 }
 .hero-img {
-  display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  display: block; width: 100%; aspect-ratio: 2.31/1; object-fit: cover;
   filter: blur(18px); transform: scale(1.06);
   transition: filter 1.4s ease, transform 1.4s ease;
 }
@@ -96,7 +94,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 
 /* ============ 히어로 ============ */
 .hero { position: relative; }
-.hero-media { position: relative; overflow: hidden; }
+.hero-media { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px; }
 .hero-caption {
   padding: 40px 20px;
   text-align: center;
@@ -130,25 +128,26 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   .hero-intro-names, .hero-intro-line { opacity: 1; clip-path: none; animation: none; }
 }
 
-/* ============ 히어로 낙엽 애니메이션 ============ */
-.leaves { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.leaf {
+/* ============ 히어로 빛 파티클 애니메이션 ============ */
+.sparkles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.spark {
   position: absolute;
-  top: -8%;
-  border-radius: 0 60% 0 60%;
+  top: 108%;
+  border-radius: 50%;
+  background: #fff;
   opacity: 0;
-  animation-name: leaf-fall;
-  animation-timing-function: linear;
+  animation-name: spark-float;
+  animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 }
-@keyframes leaf-fall {
-  0%   { top: -8%; transform: translateX(0) rotate(0deg); opacity: 0; }
-  10%  { opacity: .85; }
-  90%  { opacity: .85; }
-  100% { top: 108%; transform: translateX(var(--drift)) rotate(calc(360deg * var(--rotate-dir))); opacity: 0; }
+@keyframes spark-float {
+  0%   { top: 108%; transform: translateX(0) scale(.7); opacity: 0; }
+  15%  { opacity: var(--spark-opacity, .8); }
+  85%  { opacity: var(--spark-opacity, .8); }
+  100% { top: -8%; transform: translateX(var(--drift)) scale(1.15); opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .leaf { display: none; }
+  .spark { display: none; }
 }
 
 /* ============ 버튼 ============ */
