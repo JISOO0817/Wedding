@@ -315,7 +315,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   font-size: 12px; padding: 6px 12px 6px 6px; border-radius: 20px;
   box-shadow: 0 1px 4px rgba(0,0,0,.15);
 }
-.map-icon-img { width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; }
+.map-icon-img { width: 24px; height: 24px; border-radius: 6px; object-fit: contain; flex-shrink: 0; }
 .map-open-badge .map-icon-img { width: 18px; height: 18px; }
 .map-links { display: flex; gap: 12px; margin: 20px 0; }
 .map-link {
