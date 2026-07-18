@@ -144,29 +144,6 @@ function addToGoogleCalendar() {
   });
   window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
 }
-function downloadICS() {
-  const start = WEDDING_DATE;
-  const end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'BEGIN:VEVENT',
-    `DTSTART:${toUTCStamp(start)}`,
-    `DTEND:${toUTCStamp(end)}`,
-    `SUMMARY:${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼식`,
-    `LOCATION:${WEDDING_VENUE}`,
-    'DESCRIPTION:저희 두 사람의 결혼식에 초대합니다.',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'wedding.ics';
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
 // ========================================================
 // 카운트다운 + D-day 메시지
@@ -238,6 +215,37 @@ function moveLightbox(delta) {
   lightboxIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
   renderLightbox();
 }
+
+// 라이트박스 스와이프/드래그로 사진 넘기기 (터치, 마우스 공통)
+(function () {
+  const content = document.getElementById('lightboxContent');
+  let startX = 0;
+  let startY = 0;
+  let dragging = false;
+
+  content.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    content.style.cursor = 'grabbing';
+  });
+
+  content.addEventListener('pointerup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    content.style.cursor = 'grab';
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      moveLightbox(dx < 0 ? 1 : -1);
+    }
+  });
+
+  content.addEventListener('pointercancel', () => {
+    dragging = false;
+    content.style.cursor = 'grab';
+  });
+})();
 
 // 인앱 브라우저 등에서 뷰포트 확대 제한이 무시될 때를 대비한 방어용 블러 처리
 if (window.visualViewport) {

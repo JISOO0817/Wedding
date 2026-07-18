@@ -218,7 +218,6 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   font-family: var(--serif-kr); font-size: 13px;
 }
 .cal-btn.google { background: var(--ink); color: var(--cream); }
-.cal-btn.ics { background: var(--ink-soft); color: var(--cream); }
 .countdown { display: flex; gap: 18px; margin: 25px 0 15px; }
 .countdown div { display: flex; flex-direction: column; align-items: center; }
 .countdown b { font-family: var(--serif-en); font-size: 30px; font-weight: 600; font-variant-numeric: lining-nums tabular-nums; }
@@ -249,7 +248,7 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 .gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer; }
 .lightbox { background: rgba(0,0,0,.5); }
 .lightbox-frame { position: relative; width: 100%; max-width: var(--site-width); }
-.lightbox-content { width: 100%; touch-action: pan-x pan-y; }
+.lightbox-content { width: 100%; touch-action: pan-y; cursor: grab; }
 .lightbox-content img { display: block; width: auto; height: auto; max-width: 100%; max-height: 90vh; margin: 0 auto; }
 .lightbox.zoomed .lightbox-content img { filter: blur(20px); }
 .lightbox .modal-close {
