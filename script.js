@@ -179,7 +179,10 @@ setInterval(updateCountdown, 1000);
 // ========================================================
 // 갤러리 + 라이트박스
 // ========================================================
-const GALLERY_IMAGES = ['gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg'];
+const GALLERY_IMAGES = [
+  'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg',
+  'gallery6.jpg', 'gallery5.jpg', 'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'gallery10.jpg'
+];
 let lightboxIndex = 0;
 function initGallery() {
   const gallery = document.getElementById('gallery');
