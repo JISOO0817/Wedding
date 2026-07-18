@@ -98,7 +98,10 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   transition: filter 1.4s ease, transform 1.4s ease;
 }
 .hero-img.sharp { filter: blur(0); transform: scale(1); }
-.wide-img { width: 100%; aspect-ratio: 4/3; margin: 30px 0; }
+.wide-img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; margin: 30px 0; }
+.wide-img--portrait {
+  width: 55%; aspect-ratio: 2/3; margin: 30px auto; border-radius: 10px;
+}
 .round-img { width: 130px; height: 130px; border-radius: 50%; }
 .tl-img { width: 100%; aspect-ratio: 1/1; border-radius: 10px; }
 .closing-img { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 0; }
