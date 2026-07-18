@@ -26,6 +26,15 @@ html, body {
 body { max-width: var(--site-width); margin: 0 auto; position: relative; }
 
 img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+
+/* ============ 배경음악 버튼 ============ */
+.bgm-toggle {
+  position: fixed; top: 16px; right: 16px; z-index: 950;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.85); border: 1px solid var(--line); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
 .gallery img, .lightbox-content img { pointer-events: auto; }
 
 /* ============ 공용 블록 ============ */

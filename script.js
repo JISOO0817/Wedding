@@ -17,12 +17,53 @@ window.addEventListener('load', () => {
   initGallery();
   initReveal();
   initPetals();
+  tryAutoplayBgm();
 
   setTimeout(() => {
     document.querySelectorAll('.hero-img').forEach((img) => img.classList.add('sharp'));
     document.getElementById('heroIntro').classList.add('hide');
   }, 2000);
 });
+
+// ========================================================
+// 배경음악 (자동재생 차단 시 첫 사용자 상호작용에서 재생)
+// ========================================================
+const bgm = document.getElementById('bgm');
+let bgmPlaying = false;
+
+function setBgmIcon(playing) {
+  document.getElementById('bgmIconOn').style.display = playing ? 'block' : 'none';
+  document.getElementById('bgmIconOff').style.display = playing ? 'none' : 'block';
+}
+
+function tryAutoplayBgm() {
+  bgm.play().then(() => {
+    bgmPlaying = true;
+    setBgmIcon(true);
+  }).catch(() => {
+    const startOnInteract = () => {
+      bgm.play().then(() => {
+        bgmPlaying = true;
+        setBgmIcon(true);
+      }).catch(() => {});
+    };
+    ['click', 'touchstart', 'scroll', 'keydown'].forEach((evt) =>
+      document.addEventListener(evt, startOnInteract, { once: true, passive: true }));
+  });
+}
+
+function toggleBgm() {
+  if (bgmPlaying) {
+    bgm.pause();
+    bgmPlaying = false;
+    setBgmIcon(false);
+  } else {
+    bgm.play().then(() => {
+      bgmPlaying = true;
+      setBgmIcon(true);
+    }).catch(() => {});
+  }
+}
 
 // ========================================================
 // 히어로 꽃잎 애니메이션
