@@ -259,9 +259,18 @@ function expandGallery() {
   galleryExpanded = true;
   renderGallery();
 }
+let currentLightboxEl = null; // 현재 화면에 보이는 이미지 엘리먼트를 항상 정확히 가리킴
+let lightboxAnimating = false;
+
 function renderLightbox() {
-  document.getElementById('lightboxContent').innerHTML =
-    `<img class="lb-slide" src="images/${GALLERY_IMAGES[lightboxIndex]}" alt="갤러리 사진 확대">`;
+  const content = document.getElementById('lightboxContent');
+  content.innerHTML = '';
+  const img = document.createElement('img');
+  img.className = 'lb-slide';
+  img.alt = '갤러리 사진 확대';
+  img.src = `images/${GALLERY_IMAGES[lightboxIndex]}`;
+  content.appendChild(img);
+  currentLightboxEl = img;
   document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
 }
 function openLightbox(i) {
@@ -270,19 +279,12 @@ function openLightbox(i) {
   openModal('lightbox');
 }
 
-let lightboxTransitionTimer = null;
 function moveLightbox(delta) {
+  if (lightboxAnimating) return;
+  lightboxAnimating = true;
+
   const content = document.getElementById('lightboxContent');
-
-  // 이전 전환이 끝나기 전에 또 넘기면, 남아있던 이전 이미지를 즉시 정리
-  if (lightboxTransitionTimer) {
-    clearTimeout(lightboxTransitionTimer);
-    lightboxTransitionTimer = null;
-    const stale = content.querySelectorAll('img');
-    if (stale.length > 1) stale[0].remove();
-  }
-
-  const oldImg = content.querySelector('img');
+  const oldImg = currentLightboxEl;
   const newIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
 
   const newImg = document.createElement('img');
@@ -298,11 +300,12 @@ function moveLightbox(delta) {
   newImg.style.transform = 'translateX(0)';
 
   lightboxIndex = newIndex;
+  currentLightboxEl = newImg;
   document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
 
-  lightboxTransitionTimer = setTimeout(() => {
-    if (oldImg) oldImg.remove();
-    lightboxTransitionTimer = null;
+  setTimeout(() => {
+    if (oldImg && oldImg.parentNode) oldImg.remove();
+    lightboxAnimating = false;
   }, 500);
 }
 
@@ -310,7 +313,7 @@ function moveLightbox(delta) {
 (function () {
   const content = document.getElementById('lightboxContent');
   let startX = 0, startY = 0, dragging = false, dragDeltaX = 0;
-  let curImg = null, prevPreview = null, nextPreview = null;
+  let prevPreview = null, nextPreview = null;
 
   function clearPreviews() {
     if (prevPreview) { prevPreview.remove(); prevPreview = null; }
@@ -318,22 +321,21 @@ function moveLightbox(delta) {
   }
 
   content.addEventListener('pointerdown', (e) => {
-    if (lightboxTransitionTimer) return; // 버튼 전환 중에는 드래그 무시
+    if (lightboxAnimating) return;
     dragging = true;
     startX = e.clientX;
     startY = e.clientY;
     dragDeltaX = 0;
-    curImg = content.querySelector('.lb-slide');
     content.style.cursor = 'grabbing';
   });
 
   content.addEventListener('pointermove', (e) => {
-    if (!dragging || !curImg) return;
+    if (!dragging || !currentLightboxEl) return;
     dragDeltaX = e.clientX - startX;
     if (Math.abs(dragDeltaX) < 4) return;
 
-    curImg.style.transition = 'none';
-    curImg.style.transform = `translateX(${dragDeltaX}px)`;
+    currentLightboxEl.style.transition = 'none';
+    currentLightboxEl.style.transform = `translateX(${dragDeltaX}px)`;
 
     const w = content.offsetWidth;
     if (dragDeltaX < 0 && !nextPreview) {
@@ -359,37 +361,42 @@ function moveLightbox(delta) {
   });
 
   function commitDrag(delta) {
-    const newIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-    if (curImg) curImg.style.transform = `translateX(${delta > 0 ? '-100%' : '100%'})`;
-    if (delta > 0 && nextPreview) nextPreview.style.transform = 'translateX(0)';
-    if (delta < 0 && prevPreview) prevPreview.style.transform = 'translateX(0)';
+    lightboxAnimating = true;
+    const oldImg = currentLightboxEl;
+    const keepImg = delta > 0 ? nextPreview : prevPreview;
+    const discardImg = delta > 0 ? prevPreview : nextPreview;
 
-    lightboxIndex = newIndex;
+    if (oldImg) oldImg.style.transform = `translateX(${delta > 0 ? '-100%' : '100%'})`;
+    if (keepImg) keepImg.style.transform = 'translateX(0)';
+    if (discardImg && discardImg.parentNode) discardImg.remove();
+
+    lightboxIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    currentLightboxEl = keepImg;
     document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
 
-    const staleImg = curImg;
-    const staleOther = delta > 0 ? prevPreview : nextPreview;
+    prevPreview = null;
+    nextPreview = null;
+
     setTimeout(() => {
-      if (staleImg) staleImg.remove();
-      if (staleOther) staleOther.remove();
+      if (oldImg && oldImg.parentNode) oldImg.remove();
+      lightboxAnimating = false;
     }, 500);
   }
 
   function releaseDrag(dy) {
     const w = content.offsetWidth;
-    if (curImg) curImg.style.transition = '';
+    if (currentLightboxEl) currentLightboxEl.style.transition = '';
     if (nextPreview) nextPreview.style.transition = '';
     if (prevPreview) prevPreview.style.transition = '';
 
     if (Math.abs(dragDeltaX) > 60 && Math.abs(dragDeltaX) > Math.abs(dy)) {
       commitDrag(dragDeltaX < 0 ? 1 : -1);
     } else {
-      if (curImg) curImg.style.transform = 'translateX(0)';
+      if (currentLightboxEl) currentLightboxEl.style.transform = 'translateX(0)';
       if (nextPreview) nextPreview.style.transform = `translateX(${w}px)`;
       if (prevPreview) prevPreview.style.transform = `translateX(${-w}px)`;
       setTimeout(clearPreviews, 500);
     }
-    curImg = null;
   }
 
   content.addEventListener('pointerup', (e) => {
