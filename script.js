@@ -227,7 +227,7 @@ function updateCountdown() {
 
   const ddayEl = document.getElementById('ddayMessage');
   if (past) {
-    ddayEl.innerHTML = `${GROOM_NAME} ♥ ${BRIDE_NAME} 님이 행복한 결혼식을 마치셨습니다.`;
+    ddayEl.innerHTML = `${GROOM_NAME} <span class="heart">♥</span> ${BRIDE_NAME} 님이 행복한 결혼식을 마치셨습니다.`;
   } else {
     document.getElementById('ddayNum').textContent = days;
   }
