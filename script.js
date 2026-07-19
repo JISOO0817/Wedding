@@ -490,7 +490,7 @@ function toggleAccordion(type) {
   const content = document.getElementById(`${type}-content`);
   const arrow = document.getElementById(`${type}-arrow`);
   const open = content.classList.toggle('open');
-  arrow.textContent = open ? '▴' : '▾';
+  arrow.classList.toggle('open', open);
 }
 function copyAccount(text) {
   navigator.clipboard.writeText(text).then(() => alert('계좌번호가 복사되었습니다.'));
