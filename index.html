@@ -21,6 +21,13 @@
 </head>
 <body>
 
+<!-- 인트로 영상 -->
+<div class="intro-screen" id="introScreen">
+  <div class="intro-video-wrap">
+    <video class="intro-video" id="introVideo" src="intro.mp4" autoplay muted playsinline></video>
+  </div>
+</div>
+
 <!-- 배경음악 -->
 <button class="bgm-toggle" id="bgmToggle" onclick="toggleBgm()" aria-label="배경음악 재생/정지">
   <svg id="bgmIconOn" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
@@ -38,13 +45,6 @@
       <img class="hero-img" src="images/main2.jpg" alt="메인 사진 2">
       <img class="hero-img" src="images/main3.jpg" alt="메인 사진 3">
       <div class="petals" id="petals"></div>
-      <div class="hero-intro" id="heroIntro">
-        <svg class="intro-monogram" viewBox="0 0 200 200" width="140" height="140">
-          <circle class="intro-monogram-circle" cx="100" cy="100" r="92"></circle>
-          <text x="100" y="110" text-anchor="middle" class="intro-monogram-text">재원 &amp; 지수</text>
-        </svg>
-        <span class="intro-monogram-names">이재원 &amp; 전지수</span>
-      </div>
     </div>
   </section>
 

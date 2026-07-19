@@ -18,13 +18,34 @@ window.addEventListener('load', () => {
   initGallery();
   initReveal();
   initPetals();
-  tryAutoplayBgm();
+  initIntroVideo();
+});
 
+// 인트로 영상 재생 후 청첩장 메인 노출 (배경음악도 이때 시작)
+function initIntroVideo() {
+  const introScreen = document.getElementById('introScreen');
+  const introVideo = document.getElementById('introVideo');
+  let introFinished = false;
+  let fallbackTimer = setTimeout(finishIntro, 15000);
+
+  function finishIntro() {
+    if (introFinished) return;
+    introFinished = true;
+    clearTimeout(fallbackTimer);
+    introScreen.classList.add('hide');
+    tryAutoplayBgm();
+    startHeroReveal();
+  }
+
+  introVideo.addEventListener('ended', finishIntro, { once: true });
+  introVideo.addEventListener('error', finishIntro, { once: true });
+}
+
+function startHeroReveal() {
   setTimeout(() => {
     document.querySelectorAll('.hero-img').forEach((img) => img.classList.add('sharp'));
-    document.getElementById('heroIntro').classList.add('hide');
-  }, 2800);
-});
+  }, 400);
+}
 
 // ========================================================
 // 배경음악 (자동재생 차단 시 첫 사용자 상호작용에서 재생)
