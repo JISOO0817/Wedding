@@ -384,13 +384,22 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
   padding: 16px 0; font-size: 14px; display: flex; justify-content: space-between;
   cursor: pointer; font-family: var(--serif-kr); color: var(--ink);
 }
-.pay-content { display: none; padding-bottom: 10px; }
+.pay-content { display: none; padding-top: 4px; padding-bottom: 12px; }
 .pay-content.open { display: block; }
-.pay-row { display: flex; align-items: center; gap: 10px; font-size: 13px; padding: 8px 0; text-align: left; }
-.pay-row span { color: var(--ink-soft); width: 90px; flex-shrink: 0; }
-.pay-row b { flex: 1; }
-.pay-row button {
-  border: 1px solid var(--line); background: none; border-radius: 20px; padding: 4px 12px; font-size: 11px; cursor: pointer;
+.pay-card {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--cream); border: 1px solid var(--line); border-radius: 10px;
+  padding: 12px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  text-align: left;
+}
+.pay-card + .pay-card { margin-top: 8px; }
+.pay-info { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.pay-info span { color: var(--ink-soft); font-size: 12px; }
+.pay-info b { font-size: 14px; }
+.pay-copy {
+  border: 1px solid var(--line); background: var(--cream-alt); border-radius: 20px;
+  padding: 6px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; margin-left: 10px;
+  font-family: var(--serif-kr); color: var(--ink);
 }
 
 /* ============ 푸터 ============ */

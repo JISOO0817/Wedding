@@ -280,15 +280,15 @@
     <h2 class="section-title">마음 전하는 곳</h2>
 
     <div class="pay-box reveal">
-      <div class="pay-side">
-        <h4>신랑측</h4>
+      <button class="pay-toggle" onclick="toggleAccordion('male')">신랑측 계좌번호 <span id="male-arrow">▾</span></button>
+      <div class="pay-content" id="male-content">
         <div class="pay-card"><div class="pay-info"><span>신랑 이재원</span><b>우리 110-123-456789</b></div><button class="pay-copy" onclick="copyAccount('우리 110-123-456789')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 이형렬</span><b>농협 201-987-654321</b></div><button class="pay-copy" onclick="copyAccount('농협 201-987-654321')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>어머니 이경진</span><b>농협 201-987-654321</b></div><button class="pay-copy" onclick="copyAccount('농협 201-987-654321')">복사</button></div>
       </div>
 
-      <div class="pay-side">
-        <h4>신부측</h4>
+      <button class="pay-toggle" onclick="toggleAccordion('female')">신부측 계좌번호 <span id="female-arrow">▾</span></button>
+      <div class="pay-content" id="female-content">
         <div class="pay-card"><div class="pay-info"><span>신부 전지수</span><b>하나 407-852-963478</b></div><button class="pay-copy" onclick="copyAccount('하나 407-852-963478')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 전경표</span><b>우체국 512-134-879654</b></div><button class="pay-copy" onclick="copyAccount('우체국 512-134-879654')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>어머니 이태선</span><b>농협 201-987-654321</b></div><button class="pay-copy" onclick="copyAccount('농협 201-987-654321')">복사</button></div>
