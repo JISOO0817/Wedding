@@ -654,7 +654,7 @@ function shareKakao() {
     content: {
       title: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼합니다.`,
       description: '2026년 9월 19일 토요일 오전 11시 · KU컨벤션 웨딩홀',
-      imageUrl: 'https://jisoo0817.github.io/Wedding/images/og-main.jpg?v=2',
+      imageUrl: 'https://www.jaewon-jisoo.site/images/og-main.jpg?v=2',
       link: {
         mobileWebUrl: window.location.href,
         webUrl: window.location.href
