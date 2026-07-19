@@ -28,11 +28,19 @@ function initIntroVideo() {
   let introFinished = false;
   let fallbackTimer = setTimeout(finishIntro, 15000);
 
+  const html = document.documentElement;
+  html.style.position = 'fixed';
+  html.style.top = '0px';
+  html.style.width = '100%';
+
   function finishIntro() {
     if (introFinished) return;
     introFinished = true;
     clearTimeout(fallbackTimer);
     introScreen.classList.add('hide');
+    html.style.position = '';
+    html.style.top = '';
+    html.style.width = '';
     tryAutoplayBgm();
     startHeroReveal();
   }
@@ -271,17 +279,26 @@ function renderGallery() {
   const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
   document.getElementById('gallery').innerHTML = items.map((f, i) =>
     `<img src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
-  document.getElementById('galleryMoreBtn').style.display =
-    (!galleryExpanded && GALLERY_IMAGES.length > GALLERY_PREVIEW_COUNT) ? 'inline-block' : 'none';
+
+  const moreBtn = document.getElementById('galleryMoreBtn');
+  if (GALLERY_IMAGES.length <= GALLERY_PREVIEW_COUNT) {
+    moreBtn.style.display = 'none';
+    return;
+  }
+  moreBtn.style.display = 'inline-block';
+  moreBtn.textContent = galleryExpanded ? '접기' : '더보기';
 }
 
 function initGallery() {
   renderGallery();
 }
 
-function expandGallery() {
-  galleryExpanded = true;
+function toggleGallery() {
+  galleryExpanded = !galleryExpanded;
   renderGallery();
+  if (!galleryExpanded) {
+    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 let currentLightboxEl = null; // 현재 화면에 보이는 이미지 엘리먼트를 항상 정확히 가리킴
 let lightboxAnimating = false;
