@@ -325,7 +325,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   display: inline-flex; align-items: center; justify-content: center;
   width: 22px; height: 22px; border-radius: 50%; vertical-align: middle; margin-left: 6px;
   background: var(--cream); color: var(--ink-soft); border: 1px solid var(--line); cursor: pointer;
+  text-decoration: none;
 }
+.map-modal-inner { width: 94%; max-width: 640px; padding: 24px 12px; }
 .map-inner-img { width: 100%; display: block; border-radius: 8px; }
 .map-links { display: flex; gap: 12px; margin: 20px 0; }
 .map-link {
