@@ -676,6 +676,10 @@ function copyLink() {
   navigator.clipboard.writeText(window.location.href).then(() => alert('링크가 복사되었습니다.'));
 }
 
+function copyAddress() {
+  navigator.clipboard.writeText('서울 광진구 아차산로36길 5 KU컨벤션웨딩홀').then(() => alert('주소가 복사되었습니다.'));
+}
+
 // 우클릭(이미지 저장) 방지 - 필요 없으면 이 블록 삭제하세요
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
