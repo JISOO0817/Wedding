@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     document.querySelectorAll('.hero-img').forEach((img) => img.classList.add('sharp'));
     document.getElementById('heroIntro').classList.add('hide');
-  }, 2000);
+  }, 2800);
 });
 
 // ========================================================
