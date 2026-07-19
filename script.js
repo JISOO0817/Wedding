@@ -11,6 +11,12 @@ const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
 
 const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJUTrPHb2vPnfDdpVclbogigcoTLQ0DideLDLk6S8NOWLBCJ3d5erJcKIc_Jw/exec';
 
+// Kakao Maps SDK와 같은 JavaScript 키 사용 (Kakao Developers > 앱 키)
+const KAKAO_JS_KEY = '107a98cb71827310b382cbcec716e020';
+if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
+  Kakao.init(KAKAO_JS_KEY);
+}
+
 // ========================================================
 // 초기 진입 (히어로 인트로)
 // ========================================================
@@ -636,18 +642,34 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
 // ========================================================
 // 공유하기 / 링크 복사
 // ========================================================
-function shareInvitation() {
-  const shareData = {
-    title: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼합니다.`,
-    text: '2026년 9월 19일 토요일 오전 11시 · KU컨벤션 웨딩홀',
-    url: window.location.href
-  };
-  if (navigator.share) {
-    navigator.share(shareData).catch(() => {});
-  } else {
-    copyLink();
+function shareKakao() {
+  if (typeof Kakao === 'undefined' || !Kakao.isInitialized()) {
+    alert('카카오톡 공유를 사용할 수 없습니다.');
+    return;
   }
+  Kakao.Share.sendDefault({
+    objectType: 'feed',
+    content: {
+      title: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼합니다.`,
+      description: '2026년 9월 19일 토요일 오전 11시 · KU컨벤션 웨딩홀',
+      imageUrl: 'https://jisoo0817.github.io/Wedding/images/og-main.jpg?v=2',
+      link: {
+        mobileWebUrl: window.location.href,
+        webUrl: window.location.href
+      }
+    },
+    buttons: [
+      {
+        title: '청첩장 보기',
+        link: {
+          mobileWebUrl: window.location.href,
+          webUrl: window.location.href
+        }
+      }
+    ]
+  });
 }
+
 function copyLink() {
   navigator.clipboard.writeText(window.location.href).then(() => alert('링크가 복사되었습니다.'));
 }
