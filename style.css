@@ -171,6 +171,11 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 .btn.outline { background: transparent; border: 1px solid var(--ink); color: var(--ink); }
 .btn.solid { background: var(--ink); border: 1px solid var(--ink); color: var(--cream); }
 .btn.small { padding: 8px 18px; font-size: 12px; }
+.btn-heart { display: inline-block; color: var(--rose); animation: heart-pulse .8s ease-in-out infinite; }
+@keyframes heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+}
 
 /* ============ 가족 정보 ============ */
 .family-line { margin: 28px 0 18px; font-size: 15px; line-height: 2; }

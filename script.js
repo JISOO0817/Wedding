@@ -618,7 +618,7 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
 
   const btn = document.getElementById('gbSubmitBtn');
   btn.disabled = true;
-  btn.textContent = '저장 중...';
+  btn.innerHTML = '<span class="btn-heart">♥</span> 저장 중';
 
   try {
     const res = await fetch(GUESTBOOK_SCRIPT_URL, {
