@@ -31,6 +31,7 @@ window.addEventListener('load', () => {
 function initIntroVideo() {
   const introScreen = document.getElementById('introScreen');
   const introVideo = document.getElementById('introVideo');
+  const introSkipBtn = document.getElementById('introSkipBtn');
   let introFinished = false;
   let fallbackTimer = setTimeout(finishIntro, 15000);
 
@@ -53,6 +54,7 @@ function initIntroVideo() {
 
   introVideo.addEventListener('ended', finishIntro, { once: true });
   introVideo.addEventListener('error', finishIntro, { once: true });
+  introSkipBtn.addEventListener('click', finishIntro, { once: true });
 }
 
 function startHeroReveal() {
