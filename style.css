@@ -169,21 +169,16 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .hero { position: relative; padding: 28px 16px 24px; }
 .hero-media {
   position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
-  height: calc(var(--hero-vh) * 0.84);
+  height: calc(var(--hero-vh) * 0.78);
   border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.12);
 }
-.hero-overlay {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
-  padding: 70px 20px 28px;
-  background: linear-gradient(to top, rgba(0,0,0,.55), rgba(0,0,0,0));
-  text-align: center; pointer-events: none;
+.hero-caption { padding: 20px 20px 4px; text-align: center; }
+.hero-caption-names {
+  font-family: var(--serif-kr); font-weight: 600; color: var(--ink);
+  font-size: 20px; letter-spacing: 2px; margin-bottom: 6px;
 }
-.hero-overlay-names {
-  font-family: var(--serif-kr); font-weight: 600; color: #fff;
-  font-size: 21px; letter-spacing: 2px; margin-bottom: 8px;
-}
-.hero-overlay-date {
-  font-family: var(--serif-en); color: rgba(255,255,255,.85);
+.hero-caption-date {
+  font-family: var(--serif-en); color: var(--rose);
   font-size: 13px; letter-spacing: 3px;
 }
 
