@@ -25,7 +25,31 @@ window.addEventListener('load', () => {
   initReveal();
   initPetals();
   initIntroVideo();
+  initBottomNavSpy();
 });
+
+// 스크롤 위치에 따라 하단 네비게이션 활성 아이콘 표시
+function initBottomNavSpy() {
+  const navItems = document.querySelectorAll('.bottom-nav-item');
+  const linkBySectionId = new Map();
+  navItems.forEach((a) => linkBySectionId.set(a.getAttribute('href').slice(1), a));
+
+  const sections = [...linkBySectionId.keys()]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const link = linkBySectionId.get(entry.target.id);
+      if (!link) return;
+      navItems.forEach((a) => a.classList.remove('active'));
+      link.classList.add('active');
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach((s) => observer.observe(s));
+}
 
 // 인트로 영상 재생 후 청첩장 메인 노출 (배경음악도 이때 시작)
 function initIntroVideo() {
@@ -289,7 +313,7 @@ let galleryExpanded = false;
 function renderGallery() {
   const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
   document.getElementById('gallery').innerHTML = items.map((f, i) =>
-    `<img src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
+    `<img class="${i % 7 === 0 ? 'featured' : ''}" src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
 
   const moreBtn = document.getElementById('galleryMoreBtn');
   if (GALLERY_IMAGES.length <= GALLERY_PREVIEW_COUNT) {
@@ -640,7 +664,7 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
     errorEl.textContent = '방명록 등록에 실패했습니다. 다시 시도해주세요.';
   } finally {
     btn.disabled = false;
-    btn.textContent = '방명록 남기기';
+    btn.textContent = '메시지 남기기';
   }
 });
 

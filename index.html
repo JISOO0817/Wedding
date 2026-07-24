@@ -72,6 +72,10 @@
       <img class="hero-img" src="images/main2.jpg" alt="메인 사진 2">
       <img class="hero-img" src="images/main3.jpg" alt="메인 사진 3">
       <div class="petals" id="petals"></div>
+      <div class="hero-overlay reveal">
+        <p class="hero-overlay-names">이재원 · 전지수</p>
+        <p class="hero-overlay-date">2026. 9. 19</p>
+      </div>
     </div>
   </section>
 
@@ -148,7 +152,7 @@
   </section>
 
   <!-- ===================== 5. 우리의 타임라인 ===================== -->
-  <section class="block center alt-bg">
+  <section class="block center">
     <span class="eyebrow lined">OUR TIMELINE</span>
     <h2 class="section-title">우리가 마주한 시간들</h2>
 
@@ -251,10 +255,13 @@
     <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
     <div class="map-links reveal">
       <a class="map-link" href="https://map.naver.com/v5/search/KU컨벤션웨딩홀" target="_blank">
-        <img class="map-icon-img" src="images/naver-icon.webp" alt="네이버지도">네이버지도
+        <img class="map-icon-img" src="images/naver-icon.webp" alt="네이버지도">네이버
       </a>
       <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=KU컨벤션웨딩홀" target="_blank">
         <img class="map-icon-img" src="images/google-icon.webp" alt="구글맵">구글맵
+      </a>
+      <a class="map-link" href="tmap://route?goalname=KU%EC%BB%A8%EB%B2%A4%EC%85%98%EC%9B%A8%EB%94%A9%ED%99%80&goalx=127.074640682527&goaly=37.5383387532099">
+        <svg class="map-icon-img" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>티맵
       </a>
     </div>
 
@@ -288,11 +295,11 @@
       <input type="password" id="gbPassword" placeholder="비밀번호 (삭제 시 필요)" maxlength="20" required>
       <textarea id="gbMessage" placeholder="따뜻한 축하 메시지를 남겨주세요" maxlength="200" required></textarea>
       <p class="form-error" id="gbFormError"></p>
-      <button type="submit" class="btn solid small" id="gbSubmitBtn">방명록 남기기</button>
+      <button type="submit" class="btn solid small" id="gbSubmitBtn">메시지 남기기</button>
     </form>
 
     <div class="gb-list reveal" id="guestbookList"></div>
-    <button class="btn outline small gb-more" id="guestbookMoreBtn" onclick="openGuestbookModal()" style="display:none;">방명록 전체보기</button>
+    <button class="btn outline small gb-more" id="guestbookMoreBtn" onclick="openGuestbookModal()" style="display:none;">전체보기</button>
   </section>
 
   <!-- 방명록 전체보기 모달 -->
