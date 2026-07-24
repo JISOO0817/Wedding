@@ -169,6 +169,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .hero-media {
   position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
   height: 84vh;
+  height: 84svh;
   border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.12);
 }
 .hero-overlay {
