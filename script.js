@@ -9,6 +9,13 @@ const HOLIDAYS = [24, 25, 26]; // 캘린더에 빨간색으로 표시할 이번 
 // TODO: 실제 구글폼 링크로 교체하세요
 const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
 
+// 기기 회전 시에만 히어로 높이 기준값 갱신 (인앱 브라우저 툴바 토글로 인한 리사이즈는 무시)
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    document.documentElement.style.setProperty('--hero-vh', window.innerHeight + 'px');
+  }, 200);
+});
+
 const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJUTrPHb2vPnfDdpVclbogigcoTLQ0DideLDLk6S8NOWLBCJ3d5erJcKIc_Jw/exec';
 
 // Kakao Maps SDK와 같은 JavaScript 키 사용 (Kakao Developers > 앱 키)
