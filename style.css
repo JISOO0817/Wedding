@@ -333,7 +333,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .tl-text p { font-size: 12px; line-height: 1.7; color: var(--ink-soft); }
 
 /* ============ 갤러리 ============ */
-.gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: 4px; width: 100%; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; }
 .gallery-more { margin-top: 16px; }
 .gallery img {
   width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer;
