@@ -388,7 +388,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .map-modal-inner { width: 94%; max-width: 640px; padding: 24px 12px; }
 .map-inner-img { width: 100%; display: block; border-radius: 8px; }
 .map-links {
-  display: flex; margin: 20px 3px 0; background: #fff; border-radius: 18px;
+  display: flex; align-self: stretch; margin: 20px 3px 0; background: #fff; border-radius: 18px;
   box-shadow: 0 2px 14px rgba(0,0,0,.07); overflow: hidden;
 }
 .map-link {
