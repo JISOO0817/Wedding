@@ -246,7 +246,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   max-height: 85vh; overflow-y: auto;
 }
 .modal-close {
-  position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 16px; color: var(--ink-soft); cursor: pointer;
+  position: absolute; top: 16px; right: 16px; z-index: 2; cursor: pointer; border: none;
+  background: rgba(0,0,0,.4); color: #fff; border-radius: 50%;
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 15px;
 }
 .contact-grid { display: flex; flex-direction: column; gap: 22px; }
 .contact-side h4 { font-size: 12px; color: var(--rose); letter-spacing: 2px; margin-bottom: 10px; }
@@ -353,11 +355,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   transition: transform .5s ease-out;
 }
 .lightbox.zoomed .lb-slide { filter: blur(20px); }
-.lightbox .modal-close {
-  position: absolute; top: 12px; right: 12px; z-index: 2;
-  background: rgba(0,0,0,.4); color: #fff; border-radius: 50%;
-  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
-}
 .lightbox-footer {
   position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 1;
   display: flex; align-items: center; justify-content: center; gap: 18px;
@@ -391,14 +388,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   border-radius: 0; padding: 24px 12px; display: flex; align-items: center;
 }
 .map-inner-img { width: 100%; display: block; border-radius: 8px; }
-.map-modal-inner .modal-close {
-  position: absolute; top: 16px; right: 16px; z-index: 2;
-  background: rgba(0,0,0,.4); color: #fff; border-radius: 50%;
-  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 15px;
-}
-.guestbook-modal-inner .modal-close {
-  position: absolute; top: 18px; right: 20px; font-size: 18px;
-}
 .map-links {
   display: flex; width: 70%; margin: 20px 0 0; background: #fff; border-radius: 18px;
   box-shadow: 0 2px 14px rgba(0,0,0,.07); overflow: hidden;
