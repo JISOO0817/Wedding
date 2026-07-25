@@ -643,7 +643,7 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
   const errorEl = document.getElementById('gbFormError');
   errorEl.textContent = '';
   if (!GUESTBOOK_SCRIPT_URL) {
-    errorEl.textContent = '방명록 저장소가 아직 연결되지 않았습니다.';
+    errorEl.textContent = '축하글 저장소가 아직 연결되지 않았습니다.';
     return;
   }
   const name = document.getElementById('gbName').value.trim();
@@ -669,7 +669,7 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
     document.getElementById('gbPassword').value = '';
     document.getElementById('gbMessage').value = '';
   } catch (err) {
-    errorEl.textContent = '방명록 등록에 실패했습니다. 다시 시도해주세요.';
+    errorEl.textContent = '축하글 등록에 실패했습니다. 다시 시도해주세요.';
   } finally {
     btn.disabled = false;
     btn.textContent = '메시지 남기기';
