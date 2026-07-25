@@ -473,8 +473,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .gb-list-scroll::-webkit-scrollbar-thumb { background: var(--line); border-radius: 10px; }
 
 .guestbook-modal-inner {
-  width: 100%; max-width: var(--site-width); height: 100%; max-height: none;
-  border-radius: 0; padding-top: 50px;
+  width: 100%; max-width: var(--site-width); max-height: 100%;
+  border-radius: 0; padding: 50px 24px;
 }
 .modal-title { font-size: 16px; font-weight: 600; text-align: center; margin-bottom: 6px; }
 .modal-sub { font-size: 12px; color: var(--ink-soft); text-align: center; margin-bottom: 16px; }
