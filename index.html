@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -247,21 +247,21 @@
     <!-- 카카오맵 -->
     <div class="map-embed reveal">
       <div id="kakaoMap"></div>
-      <a class="map-open-badge" href="https://map.kakao.com/link/search/KU컨벤션웨딩홀" target="_blank">
-        <img class="map-icon-img" src="images/kakao-icon.png" alt="카카오맵">카카오맵 열기
-      </a>
     </div>
 
     <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
     <div class="map-links reveal">
+      <a class="map-link" href="https://map.kakao.com/link/search/KU컨벤션웨딩홀" target="_blank">
+        <img class="map-icon-img" src="images/kakao-icon.png" alt="카카오맵">
+        <span>카카오맵</span>
+      </a>
       <a class="map-link" href="https://map.naver.com/v5/search/KU컨벤션웨딩홀" target="_blank">
-        <img class="map-icon-img" src="images/naver-icon.webp" alt="네이버지도">네이버
+        <img class="map-icon-img" src="images/naver-icon.png" alt="네이버지도">
+        <span>네이버지도</span>
       </a>
       <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=KU컨벤션웨딩홀" target="_blank">
-        <img class="map-icon-img" src="images/google-icon.webp" alt="구글맵">구글맵
-      </a>
-      <a class="map-link" href="#" onclick="openTmap(event)">
-        <svg class="map-icon-img" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>티맵
+        <img class="map-icon-img" src="images/google-icon.webp" alt="구글맵">
+        <span>구글맵</span>
       </a>
     </div>
 
@@ -353,6 +353,6 @@
 
 </main>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=5"></script>
 </body>
 </html>
