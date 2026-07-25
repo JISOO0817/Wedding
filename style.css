@@ -471,13 +471,11 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .pay-arrow { display: inline-block; transition: transform .2s ease; }
 .pay-arrow.open { transform: rotate(180deg); }
 .pay-toggle {
-  width: 100%; background: var(--cream); border: 1px solid var(--line); border-radius: 10px;
-  padding: 14px 16px; font-size: 14px; display: flex; justify-content: space-between; align-items: center;
+  width: 100%; background: none; border: none; border-top: 1px solid var(--line);
+  padding: 16px 0; font-size: 14px; display: flex; justify-content: space-between;
   cursor: pointer; font-family: var(--serif-kr); color: var(--ink);
-  box-shadow: 0 1px 4px rgba(0,0,0,.05);
 }
-.pay-toggle + .pay-content { margin-bottom: 10px; }
-.pay-content { display: none; padding-top: 10px; padding-bottom: 2px; }
+.pay-content { display: none; padding-top: 4px; padding-bottom: 12px; }
 .pay-content.open { display: block; }
 .pay-card {
   display: flex; align-items: center; justify-content: space-between;
@@ -488,12 +486,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .pay-card + .pay-card { margin-top: 8px; }
 .pay-info { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
 .pay-info span { color: var(--ink-soft); font-size: 12px; }
-.pay-info b { display: flex; align-items: center; font-size: 14px; }
-.pay-bank {
-  display: inline-block; background: var(--rose-soft); color: var(--rose);
-  font-size: 11px; font-weight: 600; letter-spacing: .3px;
-  padding: 3px 8px; border-radius: 20px; margin-right: 8px; white-space: nowrap;
-}
+.pay-info b { font-size: 14px; }
 .pay-copy {
   border: 1px solid var(--line); background: var(--cream-alt); border-radius: 20px;
   padding: 6px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; margin-left: 10px;
