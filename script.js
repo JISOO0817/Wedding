@@ -311,7 +311,8 @@ const GALLERY_IMAGES = [
   'gallery6.jpg', 'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'gallery10.jpg',
   'gallery11.jpg', 'gallery12.jpg', 'gallery13.jpg', 'gallery14.jpg', 'gallery15.jpg',
   'gallery16.jpg', 'gallery17.jpg', 'gallery18.jpg', 'gallery19.jpg', 'gallery20.jpg',
-  'gallery21.jpg', 'gallery22.jpg', 'gallery23.jpg', 'gallery24.jpg', 'gallery25.jpg'
+  'gallery21.jpg', 'gallery22.jpg', 'gallery23.jpg', 'gallery24.jpg', 'gallery25.jpg',
+  'gallery26.jpg'
 ];
 let lightboxIndex = 0;
 const GALLERY_PREVIEW_COUNT = 9;
