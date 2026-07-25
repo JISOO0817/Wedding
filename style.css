@@ -388,24 +388,24 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .map-modal-inner { width: 94%; max-width: 640px; padding: 24px 12px; }
 .map-inner-img { width: 100%; display: block; border-radius: 8px; }
 .map-links {
-  display: flex; align-self: stretch; margin: 20px 3px 0; background: #fff; border-radius: 18px;
+  display: flex; width: 70%; margin: 20px 0 0; background: #fff; border-radius: 18px;
   box-shadow: 0 2px 14px rgba(0,0,0,.07); overflow: hidden;
 }
 .map-link {
   flex: 1; min-width: 0; position: relative;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-  padding: 30px 10px; font-size: 12px; color: var(--ink); text-decoration: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 18px 4px; font-size: 11px; color: var(--ink); text-decoration: none;
   white-space: nowrap;
 }
 .map-link + .map-link::before {
   content: ''; position: absolute; left: 0; top: 22%; bottom: 22%; width: 1px; background: var(--line);
 }
 .map-icon-frame {
-  width: 56px; height: 56px; border-radius: 16px; background: #fff;
+  width: 42px; height: 42px; border-radius: 13px; background: #fff;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   box-shadow: 0 1px 4px rgba(0,0,0,.08);
 }
-.map-icon-frame .map-icon-img { width: 56px; height: 56px; border-radius: 16px; }
+.map-icon-frame .map-icon-img { width: 42px; height: 42px; border-radius: 13px; }
 .info-accordion { width: 100%; margin-top: 20px; border-top: 1px dotted var(--line); }
 .acc-item { border-bottom: 1px dotted var(--line); padding: 16px 4px; text-align: left; font-size: 13px; line-height: 1.8; }
 .acc-item b { display: block; margin-bottom: 6px; }
