@@ -519,7 +519,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   font-size: 14px; cursor: pointer; font-family: var(--serif-kr); color: var(--ink);
 }
 .footer-btn.copy { background: var(--cream-alt); }
-.footer-btn.kakao { background: #FEE500; color: #391B1B; font-weight: 600; }
+.footer-btn.kakao { background: #DEC98C; color: #4a3b1a; font-weight: 600; }
 
 @media (max-width: 360px) {
   .block { padding: 70px 20px; }
