@@ -714,6 +714,23 @@ function copyAddress() {
   navigator.clipboard.writeText('서울 광진구 아차산로36길 5 KU컨벤션웨딩홀').then(() => alert('주소가 복사되었습니다.'));
 }
 
+function openTmap(e) {
+  e.preventDefault();
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const storeUrl = isIOS
+    ? 'https://apps.apple.com/kr/app/t-map/id431589174'
+    : 'https://play.google.com/store/apps/details?id=com.skt.tmap.ku';
+
+  const start = Date.now();
+  location.href = 'tmap://route?goalname=KU%EC%BB%A8%EB%B2%A4%EC%85%98%EC%9B%A8%EB%94%A9%ED%99%80&goalx=127.074640682527&goaly=37.5383387532099';
+
+  setTimeout(() => {
+    if (!document.hidden && Date.now() - start < 2000) {
+      location.href = storeUrl;
+    }
+  }, 1200);
+}
+
 // 우클릭(이미지 저장) 방지 - 필요 없으면 이 블록 삭제하세요
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
