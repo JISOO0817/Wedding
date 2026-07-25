@@ -318,10 +318,12 @@ let lightboxIndex = 0;
 const GALLERY_PREVIEW_COUNT = 9;
 let galleryExpanded = false;
 
+const GALLERY_FEATURED = new Set(['gallery6.jpg', 'gallery8.jpg', 'gallery12.jpg', 'gallery14.jpg', 'gallery20.jpg', 'gallery23.jpg']);
+
 function renderGallery() {
   const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
   document.getElementById('gallery').innerHTML = items.map((f, i) =>
-    `<img class="${i % 7 === 0 ? 'featured' : ''}" src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
+    `<img class="${GALLERY_FEATURED.has(f) ? 'featured' : ''}" src="images/${f}" alt="갤러리 사진" onclick="openLightbox(${i})">`).join('');
 
   const moreBtn = document.getElementById('galleryMoreBtn');
   if (GALLERY_IMAGES.length <= GALLERY_PREVIEW_COUNT) {
