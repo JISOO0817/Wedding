@@ -129,8 +129,14 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .hint { font-size: 11px; color: var(--ink-soft); margin-top: 10px; }
 .mobius-divider { display: flex; justify-content: center; margin: 14px 0; }
 .mobius-divider svg { width: 30px; height: 30px; color: var(--ink); }
-.mobius-path { stroke-dasharray: 16 54; animation: mobius-draw 2.6s linear infinite; }
-@keyframes mobius-draw { to { stroke-dashoffset: -70; } }
+.mobius-path { stroke-dasharray: 120; stroke-dashoffset: 120; animation: mobius-draw 3.5s ease-in-out infinite; }
+@keyframes mobius-draw {
+  0% { stroke-dashoffset: 120; }
+  45% { stroke-dashoffset: 0; }
+  85% { stroke-dashoffset: 0; }
+  92% { stroke-dashoffset: 120; }
+  100% { stroke-dashoffset: 120; }
+}
 .heart { color: var(--rose); }
 #ddayNum { color: var(--rose); font-weight: 700; }
 
