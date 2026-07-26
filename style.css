@@ -410,7 +410,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .map-icon-frame .icon-google { width: 30px; height: 30px; }
 .info-accordion { width: 100%; margin-top: 20px; border-top: 1px dotted var(--line); }
 .acc-item { border-bottom: 1px dotted var(--line); padding: 16px 4px; text-align: left; font-size: 13px; line-height: 1.8; }
-.acc-item b { display: block; margin-bottom: 6px; }
+.acc-label { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; }
+.acc-icon { color: var(--rose); flex-shrink: 0; }
 .acc-item p:last-child { color: var(--ink-soft); }
 
 /* ============ 탭 ============ */
