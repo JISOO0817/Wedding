@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=30">
+<link rel="stylesheet" href="style.css?v=31">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -102,7 +102,7 @@
 
   <!-- 연락처 모달 -->
   <div class="modal" id="contactModal">
-    <div class="modal-inner">
+    <div class="modal-inner modal-fullscreen">
       <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
       <div class="contact-grid">
         <div class="contact-side">
@@ -301,7 +301,7 @@
 
   <!-- 방명록 전체보기 모달 -->
   <div class="modal" id="guestbookModal">
-    <div class="modal-inner guestbook-modal-inner">
+    <div class="modal-inner modal-fullscreen">
       <button class="modal-close" onclick="closeModal('guestbookModal')">✕</button>
       <h3 class="modal-title">축하글 전체보기</h3>
       <div class="gb-list gb-list-scroll" id="guestbookModalList"></div>
