@@ -127,6 +127,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   color: var(--ink);
 }
 .hint { font-size: 11px; color: var(--ink-soft); margin-top: 10px; }
+.mobius-divider { display: flex; justify-content: center; margin: 14px 0; }
+.mobius-divider svg { width: 30px; height: 30px; color: var(--ink); }
+.mobius-path { stroke-dasharray: 16 54; animation: mobius-draw 2.6s linear infinite; }
+@keyframes mobius-draw { to { stroke-dashoffset: -70; } }
 .heart { color: var(--rose); }
 #ddayNum { color: var(--rose); font-weight: 700; }
 
