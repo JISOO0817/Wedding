@@ -184,7 +184,12 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 }
 .round-img { width: 130px; height: 130px; border-radius: 50%; }
 .tl-img { display: block; width: 100%; aspect-ratio: 1/1; border-radius: var(--radius-md); object-fit: cover; object-position: center bottom; }
-.tl-img.tl-img--contain { object-fit: contain; background: var(--cream); }
+.tl-img-frame {
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+  background: var(--cream); border: 1px solid var(--line);
+}
+.tl-img-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.tl-img-frame--zoom img { transform: scale(1.15); }
 .closing-img { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 0; }
 
 /* ============ 히어로 ============ */
