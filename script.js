@@ -718,6 +718,9 @@ function copyAddress() {
 // 우클릭(이미지 저장) 방지 - 필요 없으면 이 블록 삭제하세요
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
+// 모바일 롱프레스(이미지 저장 메뉴) 방지 보강 - 완벽 차단은 아닙니다
+document.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
+
 // 개발자 도구 단축키 차단 (F12, Ctrl+Shift+I/J/C, Ctrl+U) - 완벽 차단은 아닌 가벼운 방어용입니다
 document.addEventListener('keydown', (e) => {
   const key = e.key.toLowerCase();

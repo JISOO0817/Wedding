@@ -27,7 +27,7 @@ html, body {
 html { scroll-behavior: smooth; }
 body { max-width: var(--site-width); margin: 0 auto; position: relative; padding-bottom: calc(58px + env(safe-area-inset-bottom)); }
 
-img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; touch-action: manipulation; }
 
 /* ============ 하단 퀵 네비게이션 ============ */
 .bottom-nav {
