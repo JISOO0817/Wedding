@@ -99,6 +99,14 @@ function startHeroReveal() {
 // ========================================================
 const bgm = document.getElementById('bgm');
 let bgmPlaying = false;
+const BGM_PLAYLIST = ['music/bgm0.mp3', 'music/bgm1.mp3'];
+let bgmTrackIndex = 0;
+
+bgm.addEventListener('ended', () => {
+  bgmTrackIndex = (bgmTrackIndex + 1) % BGM_PLAYLIST.length;
+  bgm.src = BGM_PLAYLIST[bgmTrackIndex];
+  bgm.play().catch(() => {});
+});
 
 function setBgmIcon(playing) {
   document.getElementById('bgmIconOn').style.display = playing ? 'block' : 'none';
