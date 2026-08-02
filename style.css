@@ -491,11 +491,11 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 
 /* ============ 계좌번호 ============ */
 .pay-box { width: 100%; margin-top: 20px; }
-.pay-arrow { display: inline-block; transition: transform .2s ease; }
+.pay-arrow { display: inline-block; font-size: 20px; line-height: 1; transition: transform .2s ease; }
 .pay-arrow.open { transform: rotate(180deg); }
 .pay-toggle {
   width: 100%; background: none; border: none; border-top: 1px solid var(--line);
-  padding: 16px 0; font-size: 14px; display: flex; justify-content: space-between;
+  padding: 16px 0; font-size: 14px; display: flex; justify-content: space-between; align-items: center;
   cursor: pointer; font-family: var(--serif-kr); color: var(--ink);
 }
 .pay-content { display: none; padding-top: 4px; padding-bottom: 12px; }
