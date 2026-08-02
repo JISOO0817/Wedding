@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=47">
+<link rel="stylesheet" href="style.css?v=48">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -329,14 +329,20 @@
     <h2 class="section-title">마음 전하는 곳</h2>
 
     <div class="pay-box reveal">
-      <button class="pay-toggle" onclick="toggleAccordion('male')">신랑측 계좌번호 <span id="male-arrow" class="pay-arrow">▾</span></button>
+      <button class="pay-toggle" onclick="toggleAccordion('male')">
+        <span class="pay-toggle-label"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>신랑측 계좌번호</span>
+        <span id="male-arrow" class="pay-arrow">▾</span>
+      </button>
       <div class="pay-content" id="male-content">
         <div class="pay-card"><div class="pay-info"><span>신랑 이재원</span><b>토스뱅크 1000-2299-9283</b></div><button class="pay-copy" onclick="copyAccount('토스뱅크 1000-2299-9283')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 이형렬</span><b>농협은행 302-0852-8031-41</b></div><button class="pay-copy" onclick="copyAccount('농협은행 302-0852-8031-41')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>어머니 이경진</span><b>하나은행 429-094148-00107</b></div><button class="pay-copy" onclick="copyAccount('하나은행 429-094148-00107')">복사</button></div>
       </div>
 
-      <button class="pay-toggle" onclick="toggleAccordion('female')">신부측 계좌번호 <span id="female-arrow" class="pay-arrow">▾</span></button>
+      <button class="pay-toggle" onclick="toggleAccordion('female')">
+        <span class="pay-toggle-label"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>신부측 계좌번호</span>
+        <span id="female-arrow" class="pay-arrow">▾</span>
+      </button>
       <div class="pay-content" id="female-content">
         <div class="pay-card"><div class="pay-info"><span>신부 전지수</span><b>카카오뱅크 3333-23-5940154</b></div><button class="pay-copy" onclick="copyAccount('카카오뱅크 3333-23-5940154')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 전경표</span><b>케이뱅크 100-138-925262</b></div><button class="pay-copy" onclick="copyAccount('케이뱅크 100-138-925262')">복사</button></div>
