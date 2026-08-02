@@ -85,7 +85,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   display: flex; align-items: center; justify-content: center; cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,.12);
 }
-.gallery img, .lightbox-content img { pointer-events: auto; }
+.gallery-photo, .lightbox-content img { pointer-events: auto; }
 
 /* ============ 공용 블록 ============ */
 .block { padding: 90px 30px; text-align: center; border-top: 1px solid var(--line); position: relative; }
@@ -348,12 +348,13 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 /* ============ 갤러리 ============ */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: 4px; width: 100%; }
 .gallery-more { margin-top: 16px; }
-.gallery img {
-  width: 100%; aspect-ratio: 1/1; object-fit: cover; cursor: pointer;
+.gallery-photo {
+  width: 100%; aspect-ratio: 1/1; cursor: pointer;
   border-radius: 6px; transition: transform .15s ease;
+  background-size: cover; background-position: center;
 }
-.gallery img.featured { grid-column: span 2; grid-row: span 2; }
-.gallery img:active { transform: scale(0.96); }
+.gallery-photo.featured { grid-column: span 2; grid-row: span 2; }
+.gallery-photo:active { transform: scale(0.96); }
 .lightbox { background: rgba(0,0,0,.5); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 .lightbox-frame { position: relative; width: 100%; max-width: var(--site-width); }
 .lightbox-content {

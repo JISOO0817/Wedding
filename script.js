@@ -321,7 +321,7 @@ let galleryExpanded = false;
 function renderGallery() {
   const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
   document.getElementById('gallery').innerHTML = items.map((f, i) =>
-    `<img class="${i % 7 === 0 ? 'featured' : ''}" src="images/${f}" alt="갤러리 사진" loading="lazy" onclick="openLightbox(${i})">`).join('');
+    `<div class="gallery-photo ${i % 7 === 0 ? 'featured' : ''}" style="background-image:url('images/${f}')" role="img" aria-label="갤러리 사진" onclick="openLightbox(${i})"></div>`).join('');
 
   const moreBtn = document.getElementById('galleryMoreBtn');
   if (GALLERY_IMAGES.length <= GALLERY_PREVIEW_COUNT) {
