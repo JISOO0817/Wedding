@@ -97,16 +97,53 @@ function startHeroReveal() {
 // ========================================================
 // 배경음악 (자동재생 차단 시 첫 사용자 상호작용에서 재생)
 // ========================================================
-const bgm = document.getElementById('bgm');
+const bgmElA = document.getElementById('bgmA');
+const bgmElB = document.getElementById('bgmB');
 let bgmPlaying = false;
 const BGM_PLAYLIST = ['music/bgm0.mp3', 'music/bgm1.mp3'];
+const BGM_CROSSFADE_SEC = 1.2;
 let bgmTrackIndex = 0;
+let activeBgm = bgmElA;
+let nextBgm = bgmElB;
+let bgmCrossfading = false;
 
-bgm.addEventListener('ended', () => {
-  bgmTrackIndex = (bgmTrackIndex + 1) % BGM_PLAYLIST.length;
-  bgm.src = BGM_PLAYLIST[bgmTrackIndex];
-  bgm.play().catch(() => {});
-});
+activeBgm.src = BGM_PLAYLIST[0];
+nextBgm.src = BGM_PLAYLIST[1 % BGM_PLAYLIST.length];
+
+function startBgmCrossfade() {
+  bgmCrossfading = true;
+  nextBgm.currentTime = 0;
+  nextBgm.volume = 0;
+  nextBgm.play().catch(() => {});
+
+  const startedAt = Date.now();
+  const fadeTimer = setInterval(() => {
+    const progress = Math.min((Date.now() - startedAt) / (BGM_CROSSFADE_SEC * 1000), 1);
+    activeBgm.volume = 1 - progress;
+    nextBgm.volume = progress;
+    if (progress >= 1) {
+      clearInterval(fadeTimer);
+      activeBgm.pause();
+      activeBgm.volume = 1;
+      const finished = activeBgm;
+      activeBgm = nextBgm;
+      nextBgm = finished;
+      bgmTrackIndex = (bgmTrackIndex + 1) % BGM_PLAYLIST.length;
+      nextBgm.src = BGM_PLAYLIST[(bgmTrackIndex + 1) % BGM_PLAYLIST.length];
+      bgmCrossfading = false;
+    }
+  }, 50);
+}
+
+function handleBgmTimeUpdate(e) {
+  const el = e.target;
+  if (el !== activeBgm || bgmCrossfading) return;
+  if (el.duration && el.currentTime >= el.duration - BGM_CROSSFADE_SEC) {
+    startBgmCrossfade();
+  }
+}
+bgmElA.addEventListener('timeupdate', handleBgmTimeUpdate);
+bgmElB.addEventListener('timeupdate', handleBgmTimeUpdate);
 
 function setBgmIcon(playing) {
   document.getElementById('bgmIconOn').style.display = playing ? 'block' : 'none';
@@ -114,12 +151,12 @@ function setBgmIcon(playing) {
 }
 
 function tryAutoplayBgm() {
-  bgm.play().then(() => {
+  activeBgm.play().then(() => {
     bgmPlaying = true;
     setBgmIcon(true);
   }).catch(() => {
     const startOnInteract = () => {
-      bgm.play().then(() => {
+      activeBgm.play().then(() => {
         bgmPlaying = true;
         setBgmIcon(true);
       }).catch(() => {});
@@ -131,11 +168,12 @@ function tryAutoplayBgm() {
 
 function toggleBgm() {
   if (bgmPlaying) {
-    bgm.pause();
+    activeBgm.pause();
+    nextBgm.pause();
     bgmPlaying = false;
     setBgmIcon(false);
   } else {
-    bgm.play().then(() => {
+    activeBgm.play().then(() => {
       bgmPlaying = true;
       setBgmIcon(true);
     }).catch(() => {});
