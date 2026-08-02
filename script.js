@@ -349,10 +349,11 @@ let lightboxAnimating = false;
 function renderLightbox() {
   const content = document.getElementById('lightboxContent');
   content.innerHTML = '';
-  const img = document.createElement('img');
+  const img = document.createElement('div');
   img.className = 'lb-slide';
-  img.alt = '갤러리 사진 확대';
-  img.src = `images/${GALLERY_IMAGES[lightboxIndex]}`;
+  img.setAttribute('role', 'img');
+  img.setAttribute('aria-label', '갤러리 사진 확대');
+  img.style.backgroundImage = `url('images/${GALLERY_IMAGES[lightboxIndex]}')`;
   content.appendChild(img);
   currentLightboxEl = img;
   document.getElementById('lightboxCounter').textContent = `${lightboxIndex + 1} / ${GALLERY_IMAGES.length}`;
@@ -371,11 +372,12 @@ function moveLightbox(delta) {
   const oldImg = currentLightboxEl;
   const newIndex = (lightboxIndex + delta + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
 
-  const newImg = document.createElement('img');
+  const newImg = document.createElement('div');
   newImg.className = 'lb-slide';
-  newImg.alt = '갤러리 사진 확대';
+  newImg.setAttribute('role', 'img');
+  newImg.setAttribute('aria-label', '갤러리 사진 확대');
   newImg.style.transform = `translateX(${delta > 0 ? '100%' : '-100%'})`;
-  newImg.src = `images/${GALLERY_IMAGES[newIndex]}`;
+  newImg.style.backgroundImage = `url('images/${GALLERY_IMAGES[newIndex]}')`;
   content.appendChild(newImg);
 
   void newImg.offsetWidth; // 강제 리플로우로 transition이 적용되게 함
@@ -424,20 +426,22 @@ function moveLightbox(delta) {
     const w = content.offsetWidth;
     if (dragDeltaX < 0 && !nextPreview) {
       const nextIndex = (lightboxIndex + 1) % GALLERY_IMAGES.length;
-      nextPreview = document.createElement('img');
+      nextPreview = document.createElement('div');
       nextPreview.className = 'lb-slide';
+      nextPreview.setAttribute('role', 'img');
+      nextPreview.setAttribute('aria-label', '갤러리 사진 확대');
       nextPreview.style.transition = 'none';
-      nextPreview.alt = '갤러리 사진 확대';
-      nextPreview.src = `images/${GALLERY_IMAGES[nextIndex]}`;
+      nextPreview.style.backgroundImage = `url('images/${GALLERY_IMAGES[nextIndex]}')`;
       content.appendChild(nextPreview);
     }
     if (dragDeltaX > 0 && !prevPreview) {
       const prevIndex = (lightboxIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
-      prevPreview = document.createElement('img');
+      prevPreview = document.createElement('div');
       prevPreview.className = 'lb-slide';
+      prevPreview.setAttribute('role', 'img');
+      prevPreview.setAttribute('aria-label', '갤러리 사진 확대');
       prevPreview.style.transition = 'none';
-      prevPreview.alt = '갤러리 사진 확대';
-      prevPreview.src = `images/${GALLERY_IMAGES[prevIndex]}`;
+      prevPreview.style.backgroundImage = `url('images/${GALLERY_IMAGES[prevIndex]}')`;
       content.appendChild(prevPreview);
     }
     if (nextPreview) nextPreview.style.transform = `translateX(${w + dragDeltaX}px)`;
