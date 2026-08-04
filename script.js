@@ -33,7 +33,23 @@ window.addEventListener('load', () => {
   initPetals();
   initIntroVideo();
   initBottomNavSpy();
+  initMobiusLoop();
 });
+
+// 뫼비우스 띠 애니메이션 - 실제 경로 길이를 측정해 이음매 없이 반복되게 함
+function initMobiusLoop() {
+  const path = document.querySelector('.mobius-path');
+  if (!path || !path.getTotalLength) return;
+  const len = path.getTotalLength();
+  path.animate(
+    [
+      { strokeDasharray: `${len} 0`, strokeDashoffset: 0 },
+      { strokeDasharray: `${len * 0.7} ${len * 0.3}`, strokeDashoffset: -len * 0.5 },
+      { strokeDasharray: `${len} 0`, strokeDashoffset: -len }
+    ],
+    { duration: 4000, iterations: Infinity, easing: 'ease-in-out' }
+  );
+}
 
 // 스크롤 위치에 따라 하단 네비게이션 활성 아이콘 표시
 function initBottomNavSpy() {
@@ -692,7 +708,7 @@ function shareKakao() {
     objectType: 'feed',
     content: {
       title: `${GROOM_NAME} ♥ ${BRIDE_NAME} 결혼합니다.`,
-      description: '2026년 9월 19일 토요일 오전 11시 · KU컨벤션 웨딩홀',
+      description: '2026년 9월 19일 토요일 오전 11시\nKU컨벤션웨딩홀',
       imageUrl: 'https://www.jaewon-jisoo.site/images/og-main.jpg?v=3',
       link: {
         mobileWebUrl: window.location.href,
