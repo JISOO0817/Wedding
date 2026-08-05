@@ -658,8 +658,8 @@ loadGuestbook();
 
 function openGuestbookModal() {
   gbCurrentPage = 1;
-  renderGuestbookModalPage();
   openModal('guestbookModal');
+  renderGuestbookModalPage();
 }
 
 function openDeleteGuestbook(id) {
