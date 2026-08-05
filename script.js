@@ -611,7 +611,9 @@ function renderGuestbookModalPage() {
   if (gbCurrentPage > totalPages) gbCurrentPage = totalPages;
   const start = (gbCurrentPage - 1) * GB_PAGE_SIZE;
   const pageItems = guestbookData.slice(start, start + GB_PAGE_SIZE);
-  document.getElementById('guestbookModalList').innerHTML = pageItems.map(renderGuestbookCard).join('');
+  const listEl = document.getElementById('guestbookModalList');
+  listEl.innerHTML = pageItems.map(renderGuestbookCard).join('');
+  listEl.scrollTop = 0;
 
   const pagination = document.getElementById('guestbookPagination');
   if (totalPages <= 1) {
