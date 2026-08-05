@@ -494,8 +494,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .gb-page-btn.gb-page-arrow svg { width: 18px; height: 18px; }
 
 .modal-inner.modal-fullscreen {
-  width: 100%; max-width: var(--site-width); height: 100%; max-height: 100%;
-  border-radius: 0; padding: 50px 24px 20px;
+  width: 90%; max-width: var(--site-width); max-height: 90vh;
+  border-radius: var(--radius-md); padding: 50px 24px 20px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
