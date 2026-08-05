@@ -598,8 +598,46 @@ function renderGuestbookLists() {
     guestbookData.length > GUESTBOOK_PREVIEW_COUNT ? 'inline-block' : 'none';
 
   if (document.getElementById('guestbookModal').classList.contains('open')) {
-    document.getElementById('guestbookModalList').innerHTML = guestbookData.map(renderGuestbookCard).join('');
+    renderGuestbookModalPage();
   }
+}
+
+const GB_PAGE_SIZE = 5;
+const GB_PAGE_WINDOW = 5;
+let gbCurrentPage = 1;
+
+function renderGuestbookModalPage() {
+  const totalPages = Math.max(1, Math.ceil(guestbookData.length / GB_PAGE_SIZE));
+  if (gbCurrentPage > totalPages) gbCurrentPage = totalPages;
+  const start = (gbCurrentPage - 1) * GB_PAGE_SIZE;
+  const pageItems = guestbookData.slice(start, start + GB_PAGE_SIZE);
+  document.getElementById('guestbookModalList').innerHTML = pageItems.map(renderGuestbookCard).join('');
+
+  const pagination = document.getElementById('guestbookPagination');
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+
+  const windowStart = Math.floor((gbCurrentPage - 1) / GB_PAGE_WINDOW) * GB_PAGE_WINDOW + 1;
+  const windowEnd = Math.min(windowStart + GB_PAGE_WINDOW - 1, totalPages);
+
+  let html = '';
+  if (windowStart > 1) {
+    html += `<button class="gb-page-btn gb-page-arrow" onclick="goToGuestbookPage(${windowStart - 1})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>`;
+  }
+  for (let page = windowStart; page <= windowEnd; page++) {
+    html += `<button class="gb-page-btn${page === gbCurrentPage ? ' active' : ''}" onclick="goToGuestbookPage(${page})">${page}</button>`;
+  }
+  if (windowEnd < totalPages) {
+    html += `<button class="gb-page-btn gb-page-arrow" onclick="goToGuestbookPage(${windowEnd + 1})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>`;
+  }
+  pagination.innerHTML = html;
+}
+
+function goToGuestbookPage(page) {
+  gbCurrentPage = page;
+  renderGuestbookModalPage();
 }
 
 async function loadGuestbook() {
@@ -616,7 +654,8 @@ async function loadGuestbook() {
 loadGuestbook();
 
 function openGuestbookModal() {
-  document.getElementById('guestbookModalList').innerHTML = guestbookData.map(renderGuestbookCard).join('');
+  gbCurrentPage = 1;
+  renderGuestbookModalPage();
   openModal('guestbookModal');
 }
 

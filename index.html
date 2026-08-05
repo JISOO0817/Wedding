@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=50">
+<link rel="stylesheet" href="style.css?v=52">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -313,7 +313,8 @@
     <div class="modal-inner modal-fullscreen">
       <button class="modal-close" onclick="closeModal('guestbookModal')">✕</button>
       <h3 class="modal-title">축하글 전체보기</h3>
-      <div class="gb-list gb-list-scroll" id="guestbookModalList"></div>
+      <div class="gb-list" id="guestbookModalList"></div>
+      <div class="gb-pagination" id="guestbookPagination"></div>
     </div>
   </div>
 
@@ -362,6 +363,6 @@
 
 </main>
 
-<script src="script.js?v=18"></script>
+<script src="script.js?v=20"></script>
 </body>
 </html>
