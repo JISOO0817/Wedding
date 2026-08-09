@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=59">
+<link rel="stylesheet" href="style.css?v=66">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
@@ -340,14 +340,14 @@
     <div class="pay-box reveal">
       <button class="pay-toggle" onclick="toggleAccordion('male')">신랑측 계좌번호 <span id="male-arrow" class="pay-arrow open">▾</span></button>
       <div class="pay-content open" id="male-content">
-        <div class="pay-card"><div class="pay-info"><span>신랑 이재원</span><b>토스뱅크 1000-2299-9283</b></div><button class="pay-copy" onclick="copyAccount('토스뱅크 1000-2299-9283')">복사</button></div>
+        <div class="pay-card"><div class="pay-info"><span>신랑 이재원</span><b>토스뱅크 1000-2299-9283</b></div><div class="pay-actions"><a class="pay-kakao" href="https://qr.kakaopay.com/Ej8rkTjVA" target="_blank" rel="noopener" onclick="return checkMobileForKakaoPay(event)"><img src="images/kakaopay-icon.png" alt="카카오페이"></a><button class="pay-copy" onclick="copyAccount('토스뱅크 1000-2299-9283')">복사</button></div></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 이형렬</span><b>농협은행 302-0852-8031-41</b></div><button class="pay-copy" onclick="copyAccount('농협은행 302-0852-8031-41')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>어머니 이경진</span><b>하나은행 429-094148-00107</b></div><button class="pay-copy" onclick="copyAccount('하나은행 429-094148-00107')">복사</button></div>
       </div>
 
       <button class="pay-toggle" onclick="toggleAccordion('female')">신부측 계좌번호 <span id="female-arrow" class="pay-arrow open">▾</span></button>
       <div class="pay-content open" id="female-content">
-        <div class="pay-card"><div class="pay-info"><span>신부 전지수</span><b>카카오뱅크 3333-23-5940154</b></div><button class="pay-copy" onclick="copyAccount('카카오뱅크 3333-23-5940154')">복사</button></div>
+        <div class="pay-card"><div class="pay-info"><span>신부 전지수</span><b>카카오뱅크 3333-23-5940154</b></div><div class="pay-actions"><a class="pay-kakao" href="https://qr.kakaopay.com/Ej7q5Fqbg" target="_blank" rel="noopener" onclick="return checkMobileForKakaoPay(event)"><img src="images/kakaopay-icon.png" alt="카카오페이"></a><button class="pay-copy" onclick="copyAccount('카카오뱅크 3333-23-5940154')">복사</button></div></div>
         <div class="pay-card"><div class="pay-info"><span>아버지 전경표</span><b>케이뱅크 100-138-925262</b></div><button class="pay-copy" onclick="copyAccount('케이뱅크 100-138-925262')">복사</button></div>
         <div class="pay-card"><div class="pay-info"><span>어머니 이태선</span><b>국민은행 270101-04-434609</b></div><button class="pay-copy" onclick="copyAccount('국민은행 270101-04-434609')">복사</button></div>
       </div>
@@ -359,12 +359,12 @@
 
   <!-- ===================== 하단 공유 ===================== -->
   <footer class="footer">
-    <button class="footer-btn copy" onclick="copyLink()">주소 복사하기</button>
+    <button class="footer-btn copy" onclick="copyLink()">링크 복사하기</button>
     <button class="footer-btn kakao" onclick="shareKakao()">카카오톡 공유하기</button>
   </footer>
 
 </main>
 
-<script src="script.js?v=24"></script>
+<script src="script.js?v=25"></script>
 </body>
 </html>

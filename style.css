@@ -530,11 +530,20 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .pay-info { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
 .pay-info span { color: var(--ink-soft); font-size: 12px; }
 .pay-info b { font-size: 14px; }
+.pay-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; margin-left: 10px; }
 .pay-copy {
+  height: 30px; box-sizing: border-box;
   border: 1px solid var(--line); background: var(--cream-alt); border-radius: var(--radius-pill);
-  padding: 6px 14px; font-size: 12px; cursor: pointer; flex-shrink: 0; margin-left: 10px;
+  padding: 0 14px; font-size: 12px; cursor: pointer; flex-shrink: 0;
   font-family: var(--serif-kr); color: var(--ink);
 }
+.pay-kakao {
+  height: 30px; box-sizing: border-box; overflow: visible;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: none; background: #F2D878; border-radius: var(--radius-pill);
+  padding: 0 14px; cursor: pointer; flex-shrink: 0; text-decoration: none;
+}
+.pay-kakao img { height: 44px; width: auto; display: block; }
 
 /* ============ 푸터 ============ */
 .closing-note { text-align: center; font-size: 13px; color: var(--ink-soft); padding: 30px 30px 0; }

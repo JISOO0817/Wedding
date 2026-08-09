@@ -558,6 +558,13 @@ function toggleAccordion(type) {
   const open = content.classList.toggle('open');
   arrow.classList.toggle('open', open);
 }
+function checkMobileForKakaoPay(e) {
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isMobile) {
+    e.preventDefault();
+    alert('카카오페이 송금은 모바일 환경에서만 이용 가능합니다.');
+  }
+}
 function copyAccount(text) {
   navigator.clipboard.writeText(text).then(() => alert('계좌번호가 복사되었습니다.'));
 }
