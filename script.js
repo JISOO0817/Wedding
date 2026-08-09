@@ -334,10 +334,21 @@ let lightboxIndex = 0;
 const GALLERY_PREVIEW_COUNT = 9;
 let galleryExpanded = false;
 
+const galleryLazyObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target;
+    el.style.backgroundImage = `url('${el.dataset.bg}')`;
+    el.removeAttribute('data-bg');
+    observer.unobserve(el);
+  });
+}, { rootMargin: '300px 0px' });
+
 function renderGallery() {
   const items = galleryExpanded ? GALLERY_IMAGES : GALLERY_IMAGES.slice(0, GALLERY_PREVIEW_COUNT);
   document.getElementById('gallery').innerHTML = items.map((f, i) =>
-    `<div class="gallery-photo ${i % 7 === 0 ? 'featured' : ''}" style="background-image:url('images/${f}')" role="img" aria-label="갤러리 사진" onclick="openLightbox(${i})"></div>`).join('');
+    `<div class="gallery-photo ${i % 7 === 0 ? 'featured' : ''}" data-bg="images/${f}" role="img" aria-label="갤러리 사진" onclick="openLightbox(${i})"></div>`).join('');
+  document.querySelectorAll('#gallery .gallery-photo[data-bg]').forEach((el) => galleryLazyObserver.observe(el));
 
   const moreBtn = document.getElementById('galleryMoreBtn');
   if (GALLERY_IMAGES.length <= GALLERY_PREVIEW_COUNT) {
