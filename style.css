@@ -523,13 +523,13 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .pay-card {
   display: flex; align-items: center; justify-content: space-between;
   background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-md);
-  padding: 12px 14px; box-shadow: var(--shadow-sm);
+  padding: 14px; box-shadow: var(--shadow-sm);
   text-align: left;
 }
 .pay-card + .pay-card { margin-top: 8px; }
-.pay-info { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.pay-info { display: flex; flex-direction: column; gap: 5px; font-size: 13px; }
 .pay-info span { color: var(--ink-soft); font-size: 12px; }
-.pay-info b { font-size: 14px; }
+.pay-info b { font-size: 14px; line-height: 1.6; }
 .pay-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; margin-left: 10px; }
 .pay-copy {
   height: 30px; box-sizing: border-box;
@@ -541,7 +541,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   height: 30px; box-sizing: border-box; overflow: visible;
   display: inline-flex; align-items: center; justify-content: center;
   border: none; background: #F2D878; border-radius: var(--radius-pill);
-  padding: 0 14px; cursor: pointer; flex-shrink: 0; text-decoration: none;
+  padding: 0 8px; cursor: pointer; flex-shrink: 0; text-decoration: none;
 }
 .pay-kakao img { height: 44px; width: auto; display: block; }
 
