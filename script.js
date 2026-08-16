@@ -548,13 +548,13 @@ window.addEventListener('wheel', (e) => {
 ['gesturestart', 'gesturechange', 'gestureend'].forEach((evt) => {
   document.addEventListener(evt, (e) => e.preventDefault());
 });
-// 스크롤 중 손가락이 추가되며 핀치로 전환되는 순간을 touchmove보다 먼저 잡기 위해 touchstart에서도 차단
+// 스크롤 중 손가락이 추가되며 핀치로 전환되는 순간을 최대한 빨리 잡기 위해 캡처 단계에서 먼저 차단
 document.addEventListener('touchstart', (e) => {
   if (e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+}, { passive: false, capture: true });
 document.addEventListener('touchmove', (e) => {
   if (e.touches.length > 1) e.preventDefault();
-}, { passive: false });
+}, { passive: false, capture: true });
 
 // 라이트박스가 열려있는 동안 마우스 휠 스크롤 차단
 window.addEventListener('wheel', (e) => {
