@@ -544,6 +544,14 @@ window.addEventListener('wheel', (e) => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
 
+// 사파리 핀치 줌(제스처) 페이지 전체 확대 방지 - touch-action은 사파리 핀치줌을 완전히 막지 못함
+['gesturestart', 'gesturechange', 'gestureend'].forEach((evt) => {
+  document.addEventListener(evt, (e) => e.preventDefault());
+});
+document.addEventListener('touchmove', (e) => {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
 // 라이트박스가 열려있는 동안 마우스 휠 스크롤 차단
 window.addEventListener('wheel', (e) => {
   if (document.getElementById('lightbox').classList.contains('open')) e.preventDefault();
