@@ -1,4 +1,3 @@
-/* ============ 토큰 ============ */
 :root {
   --ink: #333333;
   --ink-soft: #6b6a67;
@@ -11,12 +10,10 @@
   --serif-kr: 'Noto Serif KR', serif;
   --site-width: 600px;
   --hero-vh: 100vh;
-  /* 코너 반경 스케일 - 카드/버튼 종류별로 이 4단계만 사용합니다 */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-pill: 999px;
-  /* 그림자 스케일 - 카드 크기/역할별로 이 5가지만 사용합니다 */
   --shadow-sm: 0 1px 4px rgba(0,0,0,.06);
   --shadow-lg: 0 10px 28px rgba(0,0,0,.07);
   --shadow-float: 0 2px 8px rgba(0,0,0,.12);
@@ -41,7 +38,6 @@ body { max-width: var(--site-width); margin: 0 auto; position: relative; padding
 
 img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; touch-action: manipulation; }
 
-/* ============ 하단 퀵 네비게이션 ============ */
 .bottom-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
   max-width: var(--site-width); margin: 0 auto;
@@ -68,7 +64,6 @@ img { pointer-events: none; user-select: none; -webkit-touch-callout: none; -web
 
 input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 
-/* ============ 인트로 영상 ============ */
 .intro-screen {
   position: fixed; inset: 0; z-index: 2000;
   background: #000; overflow: hidden;
@@ -89,7 +84,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 }
 .intro-skip:active { background: rgba(255,255,255,.3); }
 
-/* ============ 배경음악 버튼 ============ */
 .bgm-toggle {
   position: fixed; top: 16px; right: 16px; z-index: 950;
   width: 38px; height: 38px; border-radius: 50%;
@@ -99,7 +93,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 }
 .gallery-photo { pointer-events: auto; }
 
-/* ============ 공용 블록 ============ */
 .block { padding: 90px 30px; text-align: center; border-top: 1px solid var(--line); position: relative; }
 .block::before {
   content: '♥';
@@ -147,7 +140,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 
 .venue-line { font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
 
-/* ============ 리빌 애니메이션 ============ */
 .reveal {
   opacity: 0; transform: translateY(22px) scale(.96);
   transition: opacity .6s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1);
@@ -157,7 +149,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ============ placeholder 이미지 ============ */
 .img-placeholder {
   background: linear-gradient(135deg, var(--rose-soft), var(--cream-alt));
   border: 1px dashed var(--rose);
@@ -191,7 +182,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .tl-img-frame img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: contain; }
 .closing-img { width: 100%; height: 100%; position: absolute; inset: 0; z-index: 0; }
 
-/* ============ 히어로 ============ */
 .hero { position: relative; padding: 28px 16px 24px; }
 .hero-media {
   position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 4px;
@@ -214,7 +204,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 }
 
 
-/* ============ 히어로 꽃잎 애니메이션 ============ */
 .petals { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
 .petal {
   position: absolute;
@@ -235,7 +224,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   .petal { display: none; }
 }
 
-/* ============ 버튼 ============ */
 .btn {
   font-family: var(--serif-kr);
   font-size: 14px;
@@ -256,10 +244,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   50% { transform: scale(1.4); }
 }
 
-/* ============ 가족 정보 ============ */
 .family-line { margin: 28px 0 18px; font-size: 15px; line-height: 2; }
 
-/* ============ 모달(연락처, 라이트박스) ============ */
 .modal {
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,.55);
@@ -292,7 +278,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   text-decoration: none; flex-shrink: 0;
 }
 
-/* ============ 날짜 하이라이트 / 캘린더 / 카운트다운 ============ */
 .date-hero { display: flex; align-items: baseline; justify-content: center; gap: 8px; }
 .date-hero-day {
   font-family: var(--serif-en); font-size: 56px; line-height: 1; color: var(--ink);
@@ -341,7 +326,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .countdown b { font-family: var(--serif-en); font-size: 28px; font-weight: 600; line-height: 1; color: var(--ink); font-variant-numeric: lining-nums tabular-nums; }
 .countdown span { font-size: 10px; color: var(--ink-soft); letter-spacing: 1px; text-transform: uppercase; }
 
-/* ============ 타임라인 ============ */
 .timeline { position: relative; width: 100%; }
 .timeline::before {
   content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
@@ -359,7 +343,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .tl-text h4 { font-size: 15px; margin-bottom: 8px; }
 .tl-text p { font-size: 12px; line-height: 1.7; color: var(--ink-soft); }
 
-/* ============ 갤러리 ============ */
 .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-flow: dense; gap: 4px; width: 100%; }
 .gallery-more { margin-top: 16px; }
 .gallery-photo {
@@ -397,7 +380,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
   min-width: 46px; text-align: center; font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* ============ 오시는 길 ============ */
 .map-embed { position: relative; width: 100%; margin: 24px 0 0; border-radius: var(--radius-sm); overflow: hidden; }
 .map-embed iframe { display: block; width: 100%; }
 #kakaoMap { width: 100%; height: 280px; }
@@ -441,7 +423,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .acc-icon { color: var(--rose); flex-shrink: 0; }
 .acc-item p:last-child { color: var(--ink-soft); }
 
-/* ============ 탭 ============ */
 .tabs { display: flex; width: 100%; border-bottom: 1px solid var(--line); margin-bottom: 24px; }
 .tab-btn {
   flex: 1; background: none; border: none; padding: 10px 0; font-size: 13px; color: var(--ink-soft);
@@ -451,7 +432,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 .tab-panel { display: none; font-size: 13px; line-height: 1.9; color: var(--ink-soft); }
 .tab-panel.active { display: block; }
 
-/* ============ 방명록 ============ */
 .guestbook-form { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; }
 .guestbook-form input, .guestbook-form textarea {
   width: 100%; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px;
@@ -510,7 +490,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 #guestbookModal .modal-title { display: block; margin-bottom: 18px; }
 #guestbookDeleteModal #gbDeleteBtn { display: block; width: 100%; }
 
-/* ============ 계좌번호 ============ */
 .pay-box { width: 100%; margin-top: 20px; }
 .pay-arrow { display: inline-block; font-size: 20px; line-height: 1; transition: transform .2s ease; }
 .pay-arrow.open { transform: rotate(180deg); }
@@ -546,7 +525,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 }
 .pay-kakao img { height: 44px; width: auto; display: block; }
 
-/* ============ 푸터 ============ */
 .closing-note { text-align: center; font-size: 13px; color: var(--ink-soft); padding: 30px 30px 0; }
 .footer { display: flex; padding: 30px; gap: 12px; }
 .footer-btn {

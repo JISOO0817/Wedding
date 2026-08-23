@@ -1,15 +1,10 @@
-// ========================================================
-// 설정값 모음 (여기 값들만 바꾸면 대부분 반영됩니다)
-// ========================================================
 const WEDDING_DATE = new Date('2026-09-19T11:00:00+09:00');
 const GROOM_NAME = '재원';
 const BRIDE_NAME = '지수';
-const HOLIDAYS = [24, 25, 26]; // 캘린더에 빨간색으로 표시할 이번 달 공휴일 날짜
+const HOLIDAYS = [24, 25, 26];
 
-// TODO: 실제 구글폼 링크로 교체하세요
-const RSVP_FORM_URL = '';       // 예: 'https://forms.gle/xxxxxxxx'
+const RSVP_FORM_URL = '';
 
-// 기기 회전 시에만 히어로 높이 기준값 갱신 (인앱 브라우저 툴바 토글로 인한 리사이즈는 무시)
 window.addEventListener('orientationchange', () => {
   setTimeout(() => {
     document.documentElement.style.setProperty('--hero-vh', window.innerHeight + 'px');
@@ -18,15 +13,11 @@ window.addEventListener('orientationchange', () => {
 
 const GUESTBOOK_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwumRK6gwJUTrPHb2vPnfDdpVclbogigcoTLQ0DideLDLk6S8NOWLBCJ3d5erJcKIc_Jw/exec';
 
-// Kakao Maps SDK와 같은 JavaScript 키 사용 (Kakao Developers > 앱 키)
 const KAKAO_JS_KEY = '107a98cb71827310b382cbcec716e020';
 if (typeof Kakao !== 'undefined' && !Kakao.isInitialized()) {
   Kakao.init(KAKAO_JS_KEY);
 }
 
-// ========================================================
-// 초기 진입 (히어로 인트로)
-// ========================================================
 window.addEventListener('load', () => {
   initGallery();
   initReveal();
@@ -36,7 +27,6 @@ window.addEventListener('load', () => {
   initMobiusLoop();
 });
 
-// 뫼비우스 띠 애니메이션 - 실제 경로 길이를 측정해 이음매 없이 반복되게 함
 function initMobiusLoop() {
   const path = document.querySelector('.mobius-path');
   if (!path || !path.getTotalLength) return;
@@ -51,7 +41,6 @@ function initMobiusLoop() {
   );
 }
 
-// 스크롤 위치에 따라 하단 네비게이션 활성 아이콘 표시
 function initBottomNavSpy() {
   const navItems = document.querySelectorAll('.bottom-nav-item');
   const linkBySectionId = new Map();
@@ -74,7 +63,6 @@ function initBottomNavSpy() {
   sections.forEach((s) => observer.observe(s));
 }
 
-// 인트로 영상 재생 후 청첩장 메인 노출 (배경음악도 이때 시작)
 function initIntroVideo() {
   const introScreen = document.getElementById('introScreen');
   const introVideo = document.getElementById('introVideo');
@@ -110,9 +98,6 @@ function startHeroReveal() {
   }, 400);
 }
 
-// ========================================================
-// 배경음악 (자동재생 차단 시 첫 사용자 상호작용에서 재생)
-// ========================================================
 const bgm = document.getElementById('bgm');
 let bgmPlaying = false;
 
@@ -150,9 +135,6 @@ function toggleBgm() {
   }
 }
 
-// ========================================================
-// 히어로 꽃잎 애니메이션
-// ========================================================
 function initPetals() {
   const container = document.getElementById('petals');
   const colors = ['#fff', 'var(--rose-soft)'];
@@ -172,9 +154,6 @@ function initPetals() {
   container.innerHTML = html;
 }
 
-// ========================================================
-// 스크롤 리빌 애니메이션
-// ========================================================
 function initReveal() {
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
@@ -185,9 +164,6 @@ function initReveal() {
   items.forEach(el => io.observe(el));
 }
 
-// ========================================================
-// 모달
-// ========================================================
 let savedScrollY = 0;
 let openModalCount = 0;
 function openModal(id) {
@@ -212,9 +188,6 @@ function closeModal(id) {
   window.scrollTo({ top: savedScrollY, left: 0, behavior: 'instant' });
 }
 
-// ========================================================
-// 날짜 하이라이트 + 캘린더 렌더링
-// ========================================================
 const MONTH_ABBR = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
 
 function buildDateHero() {
@@ -254,9 +227,6 @@ function buildCalendar() {
 }
 buildCalendar();
 
-// ========================================================
-// 캘린더에 추가 (Google / iOS .ics)
-// ========================================================
 const WEDDING_VENUE = 'ku컨벤션 웨딩홀';
 function toUTCStamp(date) {
   return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
@@ -274,9 +244,6 @@ function addToGoogleCalendar() {
   window.open(`https://calendar.google.com/calendar/render?${params.toString()}`, '_blank');
 }
 
-// ========================================================
-// 카카오맵
-// ========================================================
 const WEDDING_LAT = 37.5383387532099;
 const WEDDING_LNG = 127.074640682527;
 function initKakaoMap() {
@@ -290,9 +257,6 @@ function initKakaoMap() {
 }
 initKakaoMap();
 
-// ========================================================
-// 카운트다운 + D-day 메시지
-// ========================================================
 function updateCountdown() {
   const now = new Date();
   let diff = WEDDING_DATE - now;
@@ -319,9 +283,6 @@ function updateCountdown() {
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ========================================================
-// 갤러리 + 라이트박스
-// ========================================================
 const GALLERY_IMAGES = [
   'gallery1.jpg', 'gallery2.jpg', 'gallery3.jpg', 'gallery4.jpg', 'gallery5.jpg',
   'gallery6.jpg', 'gallery7.jpg', 'gallery8.jpg', 'gallery9.jpg', 'gallery10.jpg',
@@ -370,7 +331,7 @@ function toggleGallery() {
     document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-let currentLightboxEl = null; // 현재 화면에 보이는 이미지 엘리먼트를 항상 정확히 가리킴
+let currentLightboxEl = null;
 let lightboxAnimating = false;
 
 function renderLightbox() {
@@ -407,7 +368,7 @@ function moveLightbox(delta) {
   newImg.style.backgroundImage = `url('images/${GALLERY_IMAGES[newIndex]}')`;
   content.appendChild(newImg);
 
-  void newImg.offsetWidth; // 강제 리플로우로 transition이 적용되게 함
+  void newImg.offsetWidth;
 
   if (oldImg) oldImg.style.transform = `translateX(${delta > 0 ? '-100%' : '100%'})`;
   newImg.style.transform = 'translateX(0)';
@@ -422,7 +383,6 @@ function moveLightbox(delta) {
   }, 500);
 }
 
-// 라이트박스 드래그로 사진 넘기기 (터치, 마우스 공통) - 손가락/마우스 위치를 따라 실시간으로 넘어감
 (function () {
   const content = document.getElementById('lightboxContent');
   let startX = 0, startY = 0, dragging = false, dragDeltaX = 0;
@@ -529,7 +489,6 @@ function moveLightbox(delta) {
   });
 })();
 
-// 인앱 브라우저 등에서 뷰포트 확대 제한이 무시될 때를 대비한 방어용 블러 처리
 if (window.visualViewport) {
   window.visualViewport.addEventListener('resize', () => {
     const lightbox = document.getElementById('lightbox');
@@ -539,16 +498,13 @@ if (window.visualViewport) {
   });
 }
 
-// PC에서 Ctrl+휠로 페이지 확대하는 것 방지
 window.addEventListener('wheel', (e) => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
 
-// 사파리 핀치 줌(제스처) 페이지 전체 확대 방지 - touch-action은 사파리 핀치줌을 완전히 막지 못함
 ['gesturestart', 'gesturechange', 'gestureend'].forEach((evt) => {
   document.addEventListener(evt, (e) => e.preventDefault());
 });
-// 스크롤 중 손가락이 추가되며 핀치로 전환되는 순간을 최대한 빨리 잡기 위해 캡처 단계에서 먼저 차단
 document.addEventListener('touchstart', (e) => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false, capture: true });
@@ -556,14 +512,10 @@ document.addEventListener('touchmove', (e) => {
   if (e.touches.length > 1) e.preventDefault();
 }, { passive: false, capture: true });
 
-// 라이트박스가 열려있는 동안 마우스 휠 스크롤 차단
 window.addEventListener('wheel', (e) => {
   if (document.getElementById('lightbox').classList.contains('open')) e.preventDefault();
 }, { passive: false });
 
-// ========================================================
-// 계좌번호 아코디언 + 복사
-// ========================================================
 function toggleAccordion(type) {
   const content = document.getElementById(`${type}-content`);
   const arrow = document.getElementById(`${type}-arrow`);
@@ -581,17 +533,11 @@ function copyAccount(text) {
   navigator.clipboard.writeText(text).then(() => alert('계좌번호가 복사되었습니다.'));
 }
 
-// ========================================================
-// RSVP 링크 연결
-// ========================================================
 document.addEventListener('DOMContentLoaded', () => {
   const rsvp = document.getElementById('rsvpLink');
   if (RSVP_FORM_URL) rsvp.href = RSVP_FORM_URL;
 });
 
-// ========================================================
-// 방명록 (Google Apps Script 연동)
-// ========================================================
 function escapeHTML(str) {
   const div = document.createElement('div');
   div.textContent = str;
@@ -768,9 +714,6 @@ document.getElementById('guestbookForm').addEventListener('submit', async (e) =>
   }
 });
 
-// ========================================================
-// 공유하기 / 링크 복사
-// ========================================================
 function shareKakao() {
   if (typeof Kakao === 'undefined' || !Kakao.isInitialized()) {
     alert('카카오톡 공유를 사용할 수 없습니다.');
@@ -807,13 +750,10 @@ function copyAddress() {
   navigator.clipboard.writeText('서울 광진구 아차산로36길 5 KU컨벤션웨딩홀').then(() => alert('주소가 복사되었습니다.'));
 }
 
-// 우클릭(이미지 저장) 방지 - 필요 없으면 이 블록 삭제하세요
 document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-// 모바일 롱프레스(이미지 저장 메뉴) 방지 보강 - 완벽 차단은 아닙니다
 document.querySelectorAll('img').forEach((img) => img.setAttribute('draggable', 'false'));
 
-// 개발자 도구 단축키 차단 (F12, Ctrl+Shift+I/J/C, Ctrl+U) - 완벽 차단은 아닌 가벼운 방어용입니다
 document.addEventListener('keydown', (e) => {
   const key = e.key.toLowerCase();
   const blocked =

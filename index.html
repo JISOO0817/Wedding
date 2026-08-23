@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#f5f5f4">
-<meta name="robots" content="noindex, nofollow">  
+<meta name="robots" content="noindex, nofollow">
 <script>document.documentElement.style.setProperty('--hero-vh', window.innerHeight + 'px');</script>
 <title>이재원 ♥ 전지수 결혼합니다</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23b98080' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E">
 
-<!-- 카카오톡/문자 공유 시 미리보기용 메타태그 -->
 <meta property="og:title" content="이재원 ♥ 전지수 결혼합니다.">
 <meta property="og:description" content="2026년 9월 19일 토요일 오전 11시 KU컨벤션웨딩홀">
 <meta property="og:image" content="https://www.jaewon-jisoo.site/images/og-main.jpg?v=3">
@@ -20,13 +19,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=70">
+<link rel="stylesheet" href="style.css?v=71">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=107a98cb71827310b382cbcec716e020"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 
-<!-- 인트로 영상 -->
 <div class="intro-screen" id="introScreen">
   <div class="intro-video-wrap">
     <video class="intro-video" id="introVideo" src="intro.mp4" autoplay muted playsinline></video>
@@ -34,14 +32,12 @@
   <button class="intro-skip" id="introSkipBtn" aria-label="인트로 건너뛰기">건너뛰기</button>
 </div>
 
-<!-- 배경음악 -->
 <button class="bgm-toggle" id="bgmToggle" onclick="toggleBgm()" aria-label="배경음악 재생/정지">
   <svg id="bgmIconOn" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
   <svg id="bgmIconOff" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
 </button>
 <audio id="bgm" src="music/bgm1.mp3" loop preload="auto"></audio>
 
-<!-- 하단 퀵 네비게이션 -->
 <nav class="bottom-nav" aria-label="빠른 이동">
   <a href="#section-date" class="bottom-nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -67,7 +63,6 @@
 
 <main id="invitation">
 
-  <!-- ===================== 1. 메인 ===================== -->
   <section class="hero" id="section-home">
     <div class="hero-media">
       <img class="hero-img" src="images/main1.jpg" alt="메인 사진 1">
@@ -81,7 +76,6 @@
     </div>
   </section>
 
-  <!-- ===================== 2. 초대 문구 ===================== -->
   <section class="block center">
     <span class="eyebrow lined">INVITATION</span>
     <p class="quote reveal">
@@ -112,7 +106,6 @@
     <button class="btn outline" onclick="openModal('contactModal')">축하 연락하기</button>
   </section>
 
-  <!-- 연락처 모달 -->
   <div class="modal" id="contactModal">
     <div class="modal-inner modal-fullscreen">
       <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
@@ -133,7 +126,6 @@
     </div>
   </div>
 
-  <!-- ===================== 3. 웨딩데이 / 카운트다운 ===================== -->
   <section class="block center alt-bg" id="section-date">
     <span class="eyebrow lined">WEDDING DAY</span>
 
@@ -163,7 +155,6 @@
     </div>
   </section>
 
-  <!-- ===================== 5. 우리의 타임라인 ===================== -->
   <section class="block center">
     <span class="eyebrow lined">OUR TIMELINE</span>
     <h2 class="section-title">우리가 마주한 시간들</h2>
@@ -208,7 +199,6 @@
     </div>
   </section>
 
-  <!-- ===================== 7. 갤러리 ===================== -->
   <section class="block center alt-bg" id="section-gallery">
     <span class="eyebrow lined">GALLERY</span>
     <h2 class="section-title">함께 채워갈 우리의 첫 페이지</h2>
@@ -217,7 +207,6 @@
     <button class="btn outline small gallery-more" id="galleryMoreBtn" onclick="toggleGallery()" style="display:none;">더보기</button>
   </section>
 
-  <!-- 갤러리 라이트박스 -->
   <div class="modal lightbox" id="lightbox">
     <div class="lightbox-frame">
       <button class="modal-close" onclick="closeModal('lightbox')">✕</button>
@@ -230,7 +219,6 @@
     </div>
   </div>
 
-  <!-- ===================== 8. 오시는 길 ===================== -->
   <section class="block center" id="section-location">
     <span class="eyebrow lined">LOCATION</span>
     <h2 class="section-title">오시는 길</h2>
@@ -248,7 +236,6 @@
       <button class="btn outline small" onclick="openModal('mapModal')">약도 확인하기</button>
     </div>
 
-    <!-- 약도 모달 -->
     <div class="modal" id="mapModal">
       <div class="modal-inner map-modal-inner">
         <button class="modal-close" onclick="closeModal('mapModal')">✕</button>
@@ -256,12 +243,10 @@
       </div>
     </div>
 
-    <!-- 카카오맵 -->
     <div class="map-embed reveal">
       <div id="kakaoMap"></div>
     </div>
 
-    <!-- 별도 API 키 없이 각 지도 앱 "검색" URL로 연결 -->
     <div class="map-links reveal">
       <a class="map-link" href="https://map.kakao.com/link/search/KU컨벤션웨딩홀" target="_blank">
         <span class="map-icon-frame"><img class="map-icon-img icon-kakao" src="images/kakao-icon.png" alt="카카오맵"></span>
@@ -293,7 +278,6 @@
     </div>
   </section>
 
-  <!-- ===================== 11. 방명록 =====================-->
   <section class="block center alt-bg" id="section-guestbook">
     <span class="eyebrow lined">GUEST BOOK</span>
     <h2 class="section-title">축하글</h2>
@@ -310,7 +294,6 @@
     <button class="btn outline small gb-more" id="guestbookMoreBtn" onclick="openGuestbookModal()" style="display:none;">전체보기</button>
   </section>
 
-  <!-- 방명록 전체보기 모달 -->
   <div class="modal" id="guestbookModal">
     <div class="modal-inner modal-fullscreen">
       <button class="modal-close" onclick="closeModal('guestbookModal')">✕</button>
@@ -320,7 +303,6 @@
     </div>
   </div>
 
-  <!-- 방명록 삭제 모달 -->
   <div class="modal" id="guestbookDeleteModal">
     <div class="modal-inner">
       <button class="modal-close" onclick="closeModal('guestbookDeleteModal')">✕</button>
@@ -332,7 +314,6 @@
     </div>
   </div>
 
-  <!-- ===================== 12. 마음 전하는 곳 (계좌번호) ===================== -->
   <section class="block center" id="section-pay">
     <span class="eyebrow lined">THANKS TO</span>
     <h2 class="section-title">마음 전하는 곳</h2>
@@ -354,10 +335,8 @@
     </div>
   </section>
 
-  <!-- ===================== 마무리 인사 ===================== -->
   <p class="closing-note reveal">저희의 새로운 시작을 함께해주셔서 감사합니다</p>
 
-  <!-- ===================== 하단 공유 ===================== -->
   <footer class="footer">
     <button class="footer-btn copy" onclick="copyLink()">링크 복사하기</button>
     <button class="footer-btn kakao" onclick="shareKakao()">카카오톡 공유하기</button>
@@ -365,6 +344,6 @@
 
 </main>
 
-<script src="script.js?v=28"></script>
+<script src="script.js?v=29"></script>
 </body>
 </html>
