@@ -117,7 +117,7 @@ function tryAutoplayBgm() {
         setBgmIcon(true);
       }).catch(() => {});
     };
-    ['click', 'touchstart', 'scroll', 'keydown'].forEach((evt) =>
+    ['click', 'touchstart', 'touchend', 'scroll', 'keydown'].forEach((evt) =>
       document.addEventListener(evt, startOnInteract, { once: true, passive: true }));
   });
 }
