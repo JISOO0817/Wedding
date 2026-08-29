@@ -140,6 +140,18 @@ input:focus, textarea:focus { outline: none; border-color: var(--ink); }
 
 .venue-line { font-size: 14px; color: var(--ink-soft); margin-top: 2px; }
 
+.notice-box {
+  width: 100%; background: var(--cream); border: 1px solid var(--line); border-left: 3px solid var(--rose);
+  border-radius: var(--radius-md); box-shadow: var(--shadow-sm); text-align: left; overflow: hidden;
+}
+.notice-item { padding: 16px 18px; }
+.notice-item + .notice-item { border-top: 1px dotted var(--line); }
+.notice-item b { display: block; font-size: 13px; color: var(--rose); letter-spacing: .5px; margin-bottom: 6px; }
+.notice-item p { font-size: 13px; line-height: 1.6; color: var(--ink); }
+.notice-item p + p { margin-top: 8px; }
+.notice-item p + .notice-note { margin-top: 6px; }
+.notice-note { font-size: 12px; line-height: 1.5; color: var(--ink-soft); }
+
 .reveal {
   opacity: 0; transform: translateY(22px) scale(.96);
   transition: opacity .6s ease, transform .6s cubic-bezier(.34, 1.56, .64, 1);
