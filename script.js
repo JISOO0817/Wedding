@@ -176,11 +176,17 @@ function openModal(id) {
   }
   openModalCount++;
   document.getElementById(id).classList.add('open');
-  if (id === 'mapModal') document.documentElement.classList.add('zoom-enabled');
+  if (id === 'mapModal') {
+    document.documentElement.classList.add('zoom-enabled');
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
+  }
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
-  if (id === 'mapModal') document.documentElement.classList.remove('zoom-enabled');
+  if (id === 'mapModal') {
+    document.documentElement.classList.remove('zoom-enabled');
+    document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+  }
   openModalCount = Math.max(0, openModalCount - 1);
   if (openModalCount > 0) return;
   const html = document.documentElement;
