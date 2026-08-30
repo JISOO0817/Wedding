@@ -176,9 +176,11 @@ function openModal(id) {
   }
   openModalCount++;
   document.getElementById(id).classList.add('open');
+  if (id === 'mapModal') document.documentElement.classList.add('zoom-enabled');
 }
 function closeModal(id) {
   document.getElementById(id).classList.remove('open');
+  if (id === 'mapModal') document.documentElement.classList.remove('zoom-enabled');
   openModalCount = Math.max(0, openModalCount - 1);
   if (openModalCount > 0) return;
   const html = document.documentElement;
@@ -502,14 +504,19 @@ window.addEventListener('wheel', (e) => {
   if (e.ctrlKey) e.preventDefault();
 }, { passive: false });
 
+function isInZoomableArea(e) {
+  return e.target.closest('#mapModal');
+}
 ['gesturestart', 'gesturechange', 'gestureend'].forEach((evt) => {
-  document.addEventListener(evt, (e) => e.preventDefault());
+  document.addEventListener(evt, (e) => {
+    if (!isInZoomableArea(e)) e.preventDefault();
+  });
 });
 document.addEventListener('touchstart', (e) => {
-  if (e.touches.length > 1) e.preventDefault();
+  if (e.touches.length > 1 && !isInZoomableArea(e)) e.preventDefault();
 }, { passive: false, capture: true });
 document.addEventListener('touchmove', (e) => {
-  if (e.touches.length > 1) e.preventDefault();
+  if (e.touches.length > 1 && !isInZoomableArea(e)) e.preventDefault();
 }, { passive: false, capture: true });
 
 window.addEventListener('wheel', (e) => {

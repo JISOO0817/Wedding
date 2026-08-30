@@ -32,6 +32,9 @@ html, body {
   word-break: keep-all;
   -webkit-tap-highlight-color: transparent;
 }
+html.zoom-enabled, html.zoom-enabled body {
+  touch-action: manipulation;
+}
 
 html { scroll-behavior: smooth; }
 body { max-width: var(--site-width); margin: 0 auto; position: relative; padding-bottom: calc(58px + env(safe-area-inset-bottom)); }
