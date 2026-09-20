@@ -570,7 +570,6 @@ function formatGuestbookTime(iso) {
 function renderGuestbookCard(item) {
   return `
     <div class="gb-card">
-      <button class="gb-delete" onclick="openDeleteGuestbook('${item.id}')">✕</button>
       <p class="gb-message">${escapeHTML(item.message)}</p>
       <div class="gb-meta">
         <span class="gb-from">From ${escapeHTML(item.name)}</span>
